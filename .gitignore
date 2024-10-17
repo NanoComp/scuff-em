@@ -3,6 +3,8 @@
 scuff-analyze
 scuff-caspol
 scuff-heat
+scuff-integrate
+scuff-ldos
 scuff-scatter
 scuff-static
 scuff-cas3D
@@ -12,6 +14,9 @@ scuff-plotEpsMu
 scuff-rf
 scuff-transmission
 scuff-tmatrix
+scuff-spectrum
+tBeyn411
+tSmatrix
 # don't ignore directories, though:
 !scuff-analyze/
 !scuff-caspol/
@@ -25,6 +30,8 @@ scuff-tmatrix
 !scuff-rf/
 !scuff-transmission/
 !scuff-tmatrix/
+!scuff-ldos/
+!scuff-spectrum/
 
 # ChangeLog should be generated from 'git log' at 'make dist' time #
 ChangeLog
@@ -69,6 +76,8 @@ INSTALL
 ylwrap
 py-compile
 test-driver
+scuff-em-pkgconfig
+scuff-em.pc
 
 # Packages #
 ############
@@ -113,3 +122,4 @@ interactiveTests/scuff-test-Ewald
 unitTests/unit-test-BEMMatrix
 unitTests/unit-test-PPIs
 unitTests/unit-test-PFT
+tests/CheckSCUFFData
