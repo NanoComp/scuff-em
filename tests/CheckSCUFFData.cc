@@ -41,7 +41,7 @@
 /*******************************************************************/
 /*******************************************************************/
 typedef struct Checklist
- { 
+ {
    int NumKeys;
    int *KeyColumns;
    char **KeyNames;
@@ -54,7 +54,7 @@ typedef struct Checklist
    double AbsTol, RelTol;
    int LogLevel;
    int MaxColumn;
-   
+
  } Checklist;
 
 typedef struct DataRecord
@@ -87,7 +87,7 @@ Checklist *ReadChecklist(char *FileName, int LogLevel)
   bool CaseSensitive=false;
   double AbsTol=0.0;
   double RelTol=1.0e-2;
-  
+
   /***************************************************************/
   /***************************************************************/
   /***************************************************************/
@@ -103,21 +103,21 @@ Checklist *ReadChecklist(char *FileName, int LogLevel)
      char *Tokens[MAXTOK];
      int NumTokens=Tokenize(Line, Tokens, MAXTOK);
      if ( NumTokens==0 || Tokens[0][0]=='#' )
-      continue; 
+      continue;
 
      if (!strcasecmp(Tokens[0],"KEY") || !strcasecmp(Tokens[0],"DATA"))
-      { 
+      {
         char *Name = Tokens[1];
-        int Column;
+        int Column = 1;
         if ( NumTokens!=3 || sscanf(Tokens[2],"%i",&Column)!=1 )
          ErrExit("%s:%i: syntax error",FileName,LineNum);
         Column-=1;
 
-        if (Column>MaxColumn) 
+        if (Column>MaxColumn)
          MaxColumn=Column;
 
         switch(toupper(Tokens[0][0]))
-         { case 'K': 
+         { case 'K':
             KeyColumns = (int *)reallocEC((void *)KeyColumns, (NumKeys+1)*sizeof(int));
             KeyNames   = (char **)reallocEC((void *)KeyNames, (NumKeys+1)*sizeof(char *));
             KeyColumns[NumKeys] = Column;
@@ -135,11 +135,11 @@ Checklist *ReadChecklist(char *FileName, int LogLevel)
          };
       }
      else if (!strcasecmp(Tokens[0],"CASE_SENSITIVE"))
-      { 
+      {
         CaseSensitive=true;
       }
      else if (!strcasecmp(Tokens[0],"RELTOL") || !strcasecmp(Tokens[0],"ABSTOL") )
-      { 
+      {
         double *Dest = (toupper(Tokens[0][0])=='R') ? &RelTol : &AbsTol;
         if (NumTokens!=2 || (sscanf(Tokens[1],"%le",Dest)!=1) )
          ErrExit("%s:%i: syntax error",FileName,LineNum);
@@ -249,7 +249,7 @@ DataSet *ReadDataSet(char *FileName, Checklist *CL)
   DS->DataRecords  = DataRecords;
   DS->NumRecords   = NumRecords;
   DS->TotalDataItems = NumRecords*NumData - NumWildcards;
-  DS->FileName     = strdup(FileName); 
+  DS->FileName     = strdup(FileName);
 
   if (CL->LogLevel>=LOGLEVEL_DEFAULT)
    printf("Data set %s: %i total data items (%i wildcards)\n",
@@ -305,10 +305,10 @@ DataRecord *FindDataRecord(DataSet *DS, char **KeyValues, Checklist *CL)
       IsAMatch &= Agree(DR->KeyValues[nd], KeyValues[nd], CL);
 
      if (IsAMatch)
-      return DR;    
+      return DR;
    };
   return 0;
-    
+
 }
 
 /***************************************************************/
@@ -326,7 +326,7 @@ int CompareDataSets(DataSet *TestDS, DataSet *RefDS, Checklist *CL, FILE *ErrorF
   /***************************************************************/
   int DataMatches=0;
   for(int ndr=0; ndr<RefDS->NumRecords; ndr++)
-   { 
+   {
      DataRecord *RefDR = RefDS->DataRecords[ndr];
 
      DataRecord *TestDR = FindDataRecord(TestDS, RefDR->KeyValues, CL);
@@ -339,13 +339,13 @@ int CompareDataSets(DataSet *TestDS, DataSet *RefDS, Checklist *CL, FILE *ErrorF
       };
 
      for(int nd=0; nd<NumData; nd++)
-      { 
+      {
         // skip wildcards in the reference data
         if (RefDR->DataValues[nd][0]=='*')
          continue;
 
         if ( Agree(TestDR->DataValues[nd], RefDR->DataValues[nd], CL) )
-         { 
+         {
            DataMatches++;
          }
         else
@@ -389,7 +389,7 @@ int main(int argc, char *argv[])
 //
   /* name               type    #args  max_instances  storage           count         description*/
   OptStruct OSArray[]=
-   { 
+   {
      {"Data",           PA_STRING,  1, 1,       (void *)&DataFile,   0,             "data file"},
      {"Reference",      PA_STRING,  1, 1,       (void *)&RefFile,    0,             "reference file"},
      {"Checklist",      PA_STRING,  1, 1,       (void *)&CLFile,     0,             "checklist file"},
@@ -413,11 +413,11 @@ int main(int argc, char *argv[])
    LogLevel = LOGLEVEL_SILENT;
   if (Verbose)
    LogLevel = LOGLEVEL_VERBOSE;
-  
+
   Checklist *CL   = ReadChecklist(CLFile, LogLevel);
   DataSet *TestDS = ReadDataSet(DataFile, CL);
   DataSet *RefDS  = ReadDataSet(RefFile, CL);
- 
+
   if (ErrorFileName==0)
    ErrorFileName=vstrdup("%s.errors",GetFileBase(DataFile));
   FILE *ErrorFile = 0;
