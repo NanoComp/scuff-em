@@ -19,7 +19,7 @@
 
 /*
  * Visualize.cc
- * 
+ *
  * homer reid -- 11/2006
  */
 
@@ -61,7 +61,7 @@ void WriteST(double **VV, double Vals[3], FILE *f)
   fprintf(f,"ST(%e,%e,%e,%e,%e,%e,%e,%e,%e) {%e,%e,%e};\n",
              VV[0][0], VV[0][1], VV[0][2],
              VV[1][0], VV[1][1], VV[1][2],
-             VV[2][0], VV[2][1], VV[2][2], 
+             VV[2][0], VV[2][1], VV[2][2],
              Vals[0],Vals[1],Vals[2]);
 }
 
@@ -84,12 +84,12 @@ void WriteST(RWGSurface *S, int np, double Val, FILE *f)
   Vals[0]=Vals[1]=Vals[2]=Val;
   WriteST(S, np, Vals, f);
 }
-  
+
 /***************************************************************/
 /***************************************************************/
 /***************************************************************/
 void RWGGeometry::WritePPMesh(const char *FileName, const char *Tag, bool PlotNormals)
-{  
+{
   for(int ns=0; ns<NumSurfaces; ns++)
    Surfaces[ns]->WritePPMesh(FileName, Tag, PlotNormals);
 }
@@ -106,7 +106,7 @@ void RWGGeometry::WritePPMesh(const char *FileName, const char *Tag, bool PlotNo
 /*                                                             */
 /***************************************************************/
 void RWGGeometry::WriteGPMesh(const char *format, ...)
-{ 
+{
   va_list ap;
   char FileName[MAXSTR], *p;
   FILE *f;
@@ -124,17 +124,17 @@ void RWGGeometry::WriteGPMesh(const char *format, ...)
    strcat(FileName,".gp");
 
   f=fopen(FileName,"w");
-  if (!f) 
+  if (!f)
    { fprintf(stderr,"warning: could not open file %s \n",FileName);
      return;
    };
-  
+
   /***************************************************************/
   /* plot mesh ***************************************************/
   /***************************************************************/
   for(ns=0, S=Surfaces[0]; ns<NumSurfaces; S=Surfaces[++ns])
    for(np=0, P=S->Panels[0]; np<S->NumPanels; P=S->Panels[++np])
-     { 
+     {
        PV[0]=S->Vertices + 3*P->VI[0];
        PV[1]=S->Vertices + 3*P->VI[1];
        PV[2]=S->Vertices + 3*P->VI[2];
@@ -154,7 +154,7 @@ void RWGGeometry::WriteGPMesh(const char *format, ...)
 /* information to the plot file.                               */
 /***************************************************************/
 void RWGGeometry::WriteGPMeshPlus(const char *format, ...)
-{ 
+{
   va_list ap;
   char FileName[MAXSTR];
   FILE *f;
@@ -169,14 +169,14 @@ void RWGGeometry::WriteGPMeshPlus(const char *format, ...)
   va_start(ap,format);
   vsnprintfEC(FileName,MAXSTR,format,ap);
   va_end(ap);
-  
+
   /***************************************************************/
   /* plot mesh ***************************************************/
   /***************************************************************/
   f=fopen(FileName,"w");
   for(ns=0, S=Surfaces[0]; ns<NumSurfaces; S=Surfaces[++ns])
    for(np=0, P=S->Panels[0]; np<S->NumPanels; P=S->Panels[++np])
-     { 
+     {
        PV[0]=S->Vertices + 3*P->VI[0];
        PV[1]=S->Vertices + 3*P->VI[1];
        PV[2]=S->Vertices + 3*P->VI[2];
@@ -197,7 +197,7 @@ void RWGGeometry::WriteGPMeshPlus(const char *format, ...)
   f=fopen(LabelFileName,"w");
   for(ns=0, S=Surfaces[0]; ns<NumSurfaces; S=Surfaces[++ns])
    for(np=0, P=S->Panels[0]; np<S->NumPanels; P=S->Panels[++np])
-     { 
+     {
        fprintf(f,"%e %e %e\n",P->Centroid[0], P->Centroid[1], P->Centroid[2]);
        rArea=sqrt(P->Area);
        VecPlusEquals(P->Centroid,rArea,P->ZHat);
@@ -255,7 +255,7 @@ void RWGGeometry::WriteGPMeshPlus(const char *format, ...)
 /* panel.                                                      */
 /***************************************************************/
 void RWGSurface::WritePPMesh(const char *FileName, const char *Tag, bool PlotNormals)
-{ 
+{
   /***************************************************************/
   /* attempt to open .pp file ************************************/
   /***************************************************************/
@@ -266,7 +266,7 @@ void RWGSurface::WritePPMesh(const char *FileName, const char *Tag, bool PlotNor
    strcat(buffer,".pp");
 
   FILE *f=fopen(buffer,"a");
-  if (!f) 
+  if (!f)
    { fprintf(stderr,"warning: could not open file %s \n",FileName);
      return;
    };
@@ -274,7 +274,7 @@ void RWGSurface::WritePPMesh(const char *FileName, const char *Tag, bool PlotNor
   char ViewName[MAXSTR];
   if (Tag)
    snprintf(ViewName,MAXSTR,"%s(%s)",Label,Tag);
-  else 
+  else
    snprintf(ViewName,MAXSTR,"%s",Label);
 
   /***************************************************************/
@@ -313,9 +313,9 @@ void RWGSurface::WritePPMesh(const char *FileName, const char *Tag, bool PlotNor
 #define LS_VERTEXINDICES       8
 #define LS_BFDIRECTIONS        16
 void RWGSurface::WritePPMeshLabels(const char *FileName,
-                                   const char *Tag, 
+                                   const char *Tag,
                                    int WhichLabels)
-{ 
+{
   FILE *f;
   RWGPanel *P;
   RWGEdge *E;
@@ -331,7 +331,7 @@ void RWGSurface::WritePPMeshLabels(const char *FileName,
    strcat(buffer,".pp");
 
   f=fopen(buffer,"a");
-  if (!f) 
+  if (!f)
    { fprintf(stderr,"warning: could not open file %s \n",FileName);
      return;
    };
@@ -379,7 +379,7 @@ void RWGSurface::WritePPMeshLabels(const char *FileName,
       fprintf(f,"View \"%s.ExteriorEdges\" {\n",Tag);
      else
       fprintf(f,"View \"ExteriorEdges\" {\n");
-     if (NumExteriorEdges>0) 
+     if (NumExteriorEdges>0)
       for(ne=0, E=HalfRWGEdges[0]; ne<NumExteriorEdges; E=HalfRWGEdges[++ne])
        fprintf(f,"T3(%e,%e,%e,0.0) {\"%i\"};\n",
                   E->Centroid[0],E->Centroid[1],E->Centroid[2],-(E->Index+1));
@@ -415,7 +415,7 @@ void RWGSurface::WritePPMeshLabels(const char *FileName,
      else
       fprintf(f,"View \"BFDirections\" {\n");
      for(ne=0, E=Edges[0]; ne<NumEdges; E=Edges[++ne])
-      { 
+      {
         double *PCentroid, *MCentroid;
         PCentroid = Panels[E->iPPanel]->Centroid;
         if (E->iMPanel==-1)
@@ -423,7 +423,7 @@ void RWGSurface::WritePPMeshLabels(const char *FileName,
         else
          MCentroid = Panels[E->iMPanel]->Centroid;
 
-        double Dir[3]; 
+        double Dir[3];
         Dir[0] = MCentroid[0] - PCentroid[0];
         Dir[1] = MCentroid[1] - PCentroid[1];
         Dir[2] = MCentroid[2] - PCentroid[2];
@@ -449,7 +449,7 @@ void RWGSurface::WritePPMeshLabels(const char *FileName, const char *Tag)
 }
 
 /***************************************************************/
-/* WriteGPMesh routine for RWGSurfaces.                        */    
+/* WriteGPMesh routine for RWGSurfaces.                        */
 /*                                                             */
 /* The mesh (with normals) may be plotted with the gnuplot cmd */
 /*  splot 'file.gpmsh'  w l                                    */
@@ -458,7 +458,7 @@ void RWGSurface::WritePPMeshLabels(const char *FileName, const char *Tag)
 /* will show the mesh sans normals.                            */
 /***************************************************************/
 void RWGSurface::WriteGPMesh(const char *format, ...)
-{ 
+{
   va_list ap;
   char FileName[MAXSTR];
   FILE *f;
@@ -472,13 +472,13 @@ void RWGSurface::WriteGPMesh(const char *format, ...)
   va_start(ap,format);
   vsnprintfEC(FileName,MAXSTR,format,ap);
   va_end(ap);
-  
+
   /***************************************************************/
   /* plot mesh ***************************************************/
   /***************************************************************/
   f=fopen(FileName,"w");
   for(np=0, P=Panels[0]; np<NumPanels; P=Panels[++np])
-   { 
+   {
      PV[0]=Vertices + 3*P->VI[0];
      PV[1]=Vertices + 3*P->VI[1];
      PV[2]=Vertices + 3*P->VI[2];
@@ -498,7 +498,7 @@ void RWGSurface::WriteGPMesh(const char *format, ...)
   strcat(LabelFileName,".normals");
   f=fopen(LabelFileName,"w");
   for(np=0, P=Panels[0]; np<NumPanels; P=Panels[++np])
-   { 
+   {
      fprintf(f,"%e %e %e\n",P->Centroid[0], P->Centroid[1], P->Centroid[2]);
      rArea=sqrt(P->Area);
      VecPlusEquals(P->Centroid,rArea,P->ZHat);
@@ -548,7 +548,7 @@ void RWGSurface::WriteGPMesh(const char *format, ...)
 /***************************************************************/
 /***************************************************************/
 double GetTriangleArea(double *V1, double *V2, double *V3)
-{ 
+{
   double A[3], B[3], AxB[3];
   return 0.5*VecNorm(VecCross( VecSub(V2, V1, A), VecSub(V3, V1, B), AxB ));
 }
@@ -584,7 +584,7 @@ double GetScalarValue(void *Values, int PlotType, int nv)
    { case 0: return dValues[nv];
      case 1: return abs(zValues[nv]);
      case 2: return real(zValues[nv]);
-     case 3: 
+     case 3:
      default: return imag(zValues[nv]);
    }
   return 0.0;
@@ -615,7 +615,7 @@ double RWGSurface::PlotScalarDensity(int PlotType, void *Values,
                                      int AveragingMethod,
                                      const char *UserFileName,
                                      const char *ViewNameFormat, ...)
-{ 
+{
   char FileName[MAXSTR];
   strncpy(FileName,UserFileName,MAXSTR-4);
   char *p=strrchr(FileName,'.');
@@ -623,11 +623,11 @@ double RWGSurface::PlotScalarDensity(int PlotType, void *Values,
    strcat(FileName,".pp");
 
   FILE *f=fopen(FileName,"a");
-  if (!f) 
+  if (!f)
    { fprintf(stderr,"warning: could not open file %s \n",FileName);
      return 0.0;
    }
-  
+
   COMPLETE_VARARGS(ViewNameFormat, ViewName);
 
   /***************************************************************/
@@ -670,7 +670,7 @@ double RWGSurface::PlotScalarDensity(int PlotType, void *Values,
       NumPerVertex[E->iV1]   += 1;
       NumPerVertex[E->iV2]   += 1;
     }
-   
+
   double Integral=0.0;
   fprintf(f,"View \"%s\" {\n",ViewName);
   for(int np=0; np<NumPanels; np++)
@@ -724,9 +724,9 @@ void GetVectorValue(void *Values[3], int PlotType, int nv, double V[3])
 
 double RWGSurface::PlotVectorDensity(int PlotType, void *Values[3], const char *FileName,
                                      const char *ViewNameFormat, ...)
-{ 
+{
   COMPLETE_VARARGS(ViewNameFormat, ViewName);
-  
+
   FILE *f=fopen(FileName,"a");
   if (!f) { Warn("could not open file %s",FileName); return 0.0; }
 
@@ -757,7 +757,7 @@ double RWGSurface::PlotVectorDensity(double *Values[3], const char *FileName,
 
 double RWGSurface::PlotVectorDensity(int PlotType, HMatrix *M, int WhichColumn,
                                      const char *FileName, const char *ViewNameFormat, ...)
-{ 
+{
   if (M->NR != NumPanels)
    { Warn("PlotVectorDensity: wrong-length data (%i!=%i)",M->NR,NumPanels);
      return 0.0;
@@ -797,7 +797,7 @@ bool IsStraddlerPanel(RWGGeometry *G, int ns, int np)
 void RWGGeometry::PlotSurfaceCurrents(HMatrix *PSDMatrix,
                                       cdouble Omega, double *kBloch,
                                       const char *FileNameFormat, ...)
-{ 
+{
   /***************************************************************/
   /***************************************************************/
   /***************************************************************/
@@ -824,7 +824,7 @@ void RWGGeometry::PlotSurfaceCurrents(HMatrix *PSDMatrix,
   for(int nv=0; nv<4; nv++)
    for(int ReIm=0; ReIm<2; ReIm++)
     for(int ns=0; ns<NumSurfaces; ns++)
-     { 
+     {
        RWGSurface *S = Surfaces[ns];
        int Offset    = PanelIndexOffset[ns];
        if (S->IsPEC && nv>=2) continue;
@@ -849,8 +849,8 @@ void RWGGeometry::PlotSurfaceCurrents(HMatrix *PSDMatrix,
            }
         } // for(int np=0; np<S->NumPanels; np++)
 
-       if ((ns==(NumSurfaces-1))) fprintf(f,"};\n");
-     } // 
+       if (ns==(NumSurfaces-1)) fprintf(f,"};\n");
+     } //
   fclose(f);
 
   /***************************************************************/
@@ -858,7 +858,7 @@ void RWGGeometry::PlotSurfaceCurrents(HMatrix *PSDMatrix,
   /***************************************************************/
   for(int ns=0; ns<NumSurfaces; ns++)
    for(int ReIm=0; ReIm<2; ReIm++)
-    { 
+    {
       RWGSurface *S = Surfaces[ns];
       if (S->IsPEC)  continue;
       int Offset    = PanelIndexOffset[ns];
@@ -876,7 +876,7 @@ void RWGGeometry::PlotSurfaceCurrents(HMatrix *PSDMatrix,
                                       cdouble Omega,
                                       const char *FileNameFormat,
                                       ...)
-{ 
+{
   COMPLETE_VARARGS(FileNameFormat, FileName);
   PlotSurfaceCurrents(PSDMatrix, Omega, 0, FileName);
 }
@@ -884,7 +884,7 @@ void RWGGeometry::PlotSurfaceCurrents(HMatrix *PSDMatrix,
 void RWGGeometry::PlotSurfaceCurrents(HVector *KN, cdouble Omega,
                                       double *kBloch,
                                       const char *FileNameFormat, ...)
-{ 
+{
   COMPLETE_VARARGS(FileNameFormat, FileName);
   HMatrix *PSD=GetPanelSourceDensities(Omega, kBloch, KN, 0);
   PlotSurfaceCurrents(PSD, Omega, kBloch, FileName);
@@ -893,7 +893,7 @@ void RWGGeometry::PlotSurfaceCurrents(HVector *KN, cdouble Omega,
 
 void RWGGeometry::PlotSurfaceCurrents(HVector *KN, cdouble Omega,
                                       const char *FileNameFormat, ...)
-{ 
+{
   COMPLETE_VARARGS(FileNameFormat, FileName);
   PlotSurfaceCurrents(KN, Omega, 0, FileName);
 }
@@ -937,7 +937,7 @@ HVector *RWGSurface::MakeMeshPlot(MeshDataFunc MDFunc, void *UserData,
    }
   if (PPOptions) fprintf(f,"%s",PPOptions);
   fclose(f);
-     
+
   /***************************************************************/
   /* read in mesh and put vertex coordinates into XMatrix        */
   /***************************************************************/
@@ -1040,21 +1040,21 @@ HMatrix *MakeMeshPlot(MeshDataFunc MDFunc, void *UserData,
 {
   char MeshFileCopy[100];
   snprintf(MeshFileCopy,100,"%s",MeshFile);
-  
+
   char PPFileBase[100];
   if (CallerFileBase)
-   snprintf(PPFileBase,100,"%s.%s",CallerFileBase,GetFileBase(MeshFileCopy));  
+   snprintf(PPFileBase,100,"%s.%s",CallerFileBase,GetFileBase(MeshFileCopy));
   else
    snprintf(PPFileBase,100,"%s",GetFileBase(MeshFileCopy));
   char FFBuffer[100], *FullFileBase = (TransFile ? FFBuffer : PPFileBase);
 
   RWGSurface *S=new RWGSurface(MeshFile);
-  if (S->ErrMsg) 
+  if (S->ErrMsg)
    { Warn("MakeMeshPlot: %s (aborting)",S->ErrMsg);
      delete S;
-     return 0; 
+     return 0;
    }
-     
+
   GTCList GTCs = ReadTransFile(TransFile);
   int NT = GTCs.size();
   HMatrix *Integrals=0;
