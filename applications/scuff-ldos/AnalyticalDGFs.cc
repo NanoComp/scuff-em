@@ -17,7 +17,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 /*
- * AnalyticalDGFs.cc -- calculation of dyadic Green's functions 
+ * AnalyticalDGFs.cc -- calculation of dyadic Green's functions
  *                   -- in some analytically tractable situations
  *
  * Homer Reid 7/2015
@@ -49,8 +49,8 @@ typedef struct HalfSpaceData
    cdouble Mu;        // half-space permeability
 
    double *kBloch;    // point in Brillouin zone
-   bool Accumulate; 
-   
+   bool Accumulate;
+
    double Workspace[12];
    bool Polar;
    bool Propagating;
@@ -78,11 +78,11 @@ void HalfSpaceDGFIntegrand(const double *q, HalfSpaceData *Data,
   if (Data->Accumulate == false)
    memset(Integrand, 0, IDim*sizeof(cdouble));
 
-  // Polar = true --> we have already integrated out 
+  // Polar = true --> we have already integrated out
   //                  q_Theta to yield Bessel functions,
-  //                  and what we are evaluating here 
+  //                  and what we are evaluating here
   //                  is just the integrand of the 1-dimensional
-  //                  q_r integral 
+  //                  q_r integral
   //
   // Polar = false--> we are evaluating the 2-dimensional
   //                  (qx,qy) integral
@@ -90,10 +90,10 @@ void HalfSpaceDGFIntegrand(const double *q, HalfSpaceData *Data,
   double q2, qMag, Jacobian=1.0;
   cdouble One, Cos, Sin, Cos2, Sin2, CosSin;
   if (Polar)
-   { 
+   {
      if (Data->Propagating)
       qMag     = q[0]*real(k0);
-     else 
+     else
       { double Denom = 1.0/(1.0-q[0]);
         qMag = real(k0) * (1.0 + q[0]*Denom);
         Jacobian = Denom*Denom;
@@ -145,14 +145,14 @@ void HalfSpaceDGFIntegrand(const double *q, HalfSpaceData *Data,
   /***************************************************************/
   /***************************************************************/
   for(int nx=0; nx<XMatrix->NR; nx++)
-   { 
+   {
      double XDest[3], XSourceBuffer[3];
      double *XSource = (TwoPointDGF) ? XSourceBuffer : XDest;
      XMatrix->GetEntriesD(nx,"0:2",XDest);
      if (TwoPointDGF)
       XMatrix->GetEntriesD(nx,"3:5",XSource);
 
-     if ( abs(imag(qz*(XSource[2] + XDest[2])) > 40.0 ) )
+     if ( abs(imag(qz*(XSource[2] + XDest[2]))) > 40.0 )
       continue;
 
      double R[3];
@@ -178,7 +178,7 @@ void HalfSpaceDGFIntegrand(const double *q, HalfSpaceData *Data,
       }
      else
       qDotRho = q[0]*R[0] + q[1]*R[1];
-     
+
      MTE[0][0] = Sin2;
      MTE[1][1] = Cos2;
      MTE[0][1] = MTE[1][0] = -1.0*CosSin;
@@ -194,12 +194,12 @@ void HalfSpaceDGFIntegrand(const double *q, HalfSpaceData *Data,
 
      cdouble ExpArg = II*( qDotRho + qz*(XSource[2]+XDest[2]) );
      cdouble Factor = II*exp(ExpArg) / (8.0*M_PI*M_PI*qz);
-  
+
      for(int Mu=0; Mu<3; Mu++)
       for(int Nu=0; Nu<3; Nu++)
-       { Integrand[18*nx + 0*9 + 3*Mu + Nu] 
+       { Integrand[18*nx + 0*9 + 3*Mu + Nu]
           += Jacobian * Factor * (rTE*MTE[Mu][Nu] + rTM*MTM[Mu][Nu]);
-         Integrand[18*nx + 1*9 + 3*Mu + Nu] 
+         Integrand[18*nx + 1*9 + 3*Mu + Nu]
           += Jacobian * Factor * (rTM*MTE[Mu][Nu] + rTE*MTM[Mu][Nu]);
        };
 
@@ -228,11 +228,11 @@ void HalfSpaceDGFSummand(double *Gamma, void *UserData, double *Sum)
 {
   HalfSpaceData *Data = (HalfSpaceData *)UserData;
   double *kBloch    = Data->kBloch;
-  
+
   double q[2];
   q[0] = kBloch[0] + Gamma[0];
   q[1] = kBloch[1] + Gamma[1];
-  
+
   HalfSpaceDGFIntegrand(q, (HalfSpaceData *)UserData, (cdouble *)Sum);
 }
 
@@ -241,12 +241,12 @@ void HalfSpaceDGFSummand(double *Gamma, void *UserData, double *Sum)
 /***************************************************************/
 void GetHalfSpaceDGFs_BZ(HMatrix *XMatrix,
                          cdouble Omega, double kBloch[2],
-                         HMatrix *RLBasis, double BZVolume, 
+                         HMatrix *RLBasis, double BZVolume,
                          MatProp *MP,
-                         double RelTolSum, double AbsTolSum, 
+                         double RelTolSum, double AbsTolSum,
                          int MaxCells,
                          HMatrix *GMatrix)
-{ 
+{
   int IDim = 18*XMatrix->NR;
   static int IDimSave=0;
   static cdouble *Sum=0;
@@ -268,7 +268,7 @@ void GetHalfSpaceDGFs_BZ(HMatrix *XMatrix,
   Data->Polar       = false;
   Data->nCalls      = 0;
   Data->Accumulate  = true;
- 
+
   Log("Evaluating BZ sum for DGF integrand at kBloch=(%e,%e)...", kBloch[0], kBloch[1]);
   GetLatticeSum(HalfSpaceDGFSummand, (void *)Data, 2*IDim, RLBasis,
                 (double *)Sum, AbsTolSum, RelTolSum, MaxCells);
@@ -283,9 +283,9 @@ void GetHalfSpaceDGFs_BZ(HMatrix *XMatrix,
 /***************************************************************/
 /***************************************************************/
 /***************************************************************/
-int HalfSpaceDGFIntegrand_Polar(unsigned ndim, const double *u, 
+int HalfSpaceDGFIntegrand_Polar(unsigned ndim, const double *u,
                                 void *UserData, unsigned fdim, double *fval)
-{ 
+{
   (void) ndim;
   (void) fdim;
   HalfSpaceDGFIntegrand(u, (HalfSpaceData *)UserData, (cdouble *)fval);
@@ -296,8 +296,8 @@ void GetHalfSpaceDGFs_Polar(HMatrix *XMatrix, cdouble Omega,
                             MatProp *MP,
                             double RelTol, double AbsTol,
                             int MaxEvals, HMatrix *GMatrix)
-{ 
- 
+{
+
   /*--------------------------------------------------------------*/
   /*--------------------------------------------------------------*/
   /*--------------------------------------------------------------*/
@@ -324,9 +324,9 @@ void GetHalfSpaceDGFs_Polar(HMatrix *XMatrix, cdouble Omega,
   double Lower, Upper;
   HalfSpaceData MyData, *Data=&MyData;
   Data->XMatrix    = XMatrix;
-  Data->Omega      = Omega; 
+  Data->Omega      = Omega;
   Data->Epsilon    = Epsilon;
-  Data->Mu         = Mu;     
+  Data->Mu         = Mu;
   Data->Polar      = true;
   Data->Accumulate = false;
 
@@ -335,7 +335,7 @@ void GetHalfSpaceDGFs_Polar(HMatrix *XMatrix, cdouble Omega,
   Data->nCalls      = 0;
   Data->Propagating= true;
   hcubature(2*IDim, HalfSpaceDGFIntegrand_Polar, (void *)Data, 1,
-            &Lower, &Upper, MaxEvals, AbsTol, RelTol, 
+            &Lower, &Upper, MaxEvals, AbsTol, RelTol,
             ERROR_INDIVIDUAL, (double *)Integral1, (double *)Error);
   Log(" small-q integral: %i calls",Data->nCalls);
 
@@ -343,23 +343,23 @@ void GetHalfSpaceDGFs_Polar(HMatrix *XMatrix, cdouble Omega,
   Upper=1.0;
   Data->nCalls      = 0;
   Data->Propagating = false;
-  hcubature(2*IDim, HalfSpaceDGFIntegrand_Polar, (void *)Data, 1, 
-            &Lower, &Upper, MaxEvals, AbsTol, RelTol, 
+  hcubature(2*IDim, HalfSpaceDGFIntegrand_Polar, (void *)Data, 1,
+            &Lower, &Upper, MaxEvals, AbsTol, RelTol,
             ERROR_INDIVIDUAL, (double *)Integral2, (double *)Error);
   Log(" large-q integral: %i calls",Data->nCalls);
 
- 
+
   for(int nx=0; nx<NX; nx++)
    for(int ng=0; ng<18; ng++)
     GMatrix->SetEntry(nx, ng, Integral1[18*nx + ng] + Integral2[18*nx + ng]);
-  
+
 }
 
 /***************************************************************/
 /* Ground-plane DGFs computed by the image-source method       */
 /***************************************************************/
 void GetGroundPlaneDGFs(HMatrix *XMatrix,
-                        cdouble Omega, double *kBloch, HMatrix *LBasis, 
+                        cdouble Omega, double *kBloch, HMatrix *LBasis,
                         HMatrix *GMatrix)
 {
   /***************************************************************/
@@ -378,7 +378,7 @@ void GetGroundPlaneDGFs(HMatrix *XMatrix,
 
   int NX = XMatrix->NR;
   for(int nx=0; nx<NX; nx++)
-   { 
+   {
      double XDest[3], XSource[3];
      XMatrix->GetEntriesD(nx, "0:2", XDest);
      if (TwoPointDGF)
@@ -392,7 +392,7 @@ void GetGroundPlaneDGFs(HMatrix *XMatrix,
      /* columns of DGF are fields of image source at eval point    **/
      /***************************************************************/
      for(int Nu=0; Nu<3; Nu++)
-      { 
+      {
         cdouble P[3], EH[6];
 
         memset(P, 0, 3*sizeof(cdouble));
@@ -423,8 +423,8 @@ int GetVacuumDGFs(double *XSource, double *XDest,
                   HMatrix *RLBasis, double BZVolume,
                   double RelTol, double AbsTol, int MaxCells,
                   cdouble GE[3][3], cdouble GH[3][3])
-{ 
- 
+{
+
   HalfSpaceData MyHalfSpaceData, *Data=&MyHalfSpaceData;
   Data->XSource = XSource;
   Data->XDest   = XDest;
@@ -460,12 +460,12 @@ void ProcessHalfSpaceDGFs(HVector *OmegaPoints,
   char *Label = HalfSpace ? HalfSpace : const_cast<char *>("GroundPlane");
 
   for(int nep=0; nep<nEPFiles; nep++)
-   { 
+   {
      HMatrix *XMatrix = new HMatrix(EPFiles[nep]);
      int NX = XMatrix->NR;
      bool TwoPointDGF = (XMatrix->NC==6);
      HMatrix *GMatrix = new HMatrix(NX, 18, LHM_COMPLEX);
-     
+
      FILE *f=vfopen("%s.%s.DGFs","w",GetFileBase(EPFiles[nep]),Label);
      fprintf(f,"# scuff-ldos ran on %s (%s)\n",GetHostName(),GetTimeString());
      fprintf(f,"# data file columns: \n");
@@ -511,7 +511,7 @@ fclose(LogFile);
          { for(int Mu=0; Mu<(TwoPointDGF ? 6 : 3); Mu++)
             fprintf(f,"%e ",XMatrix->GetEntryD(nx,Mu));
            fprintf(f,"%e %e ",real(Omega),imag(Omega));
-           
+
            fprintf(f,"%e  ",PreFac*imag( GMatrix->GetEntry(nx, 0 + 0)
                                         +GMatrix->GetEntry(nx, 0 + 4)
                                         +GMatrix->GetEntry(nx, 0 + 8)
@@ -529,8 +529,8 @@ fclose(LogFile);
         fflush(f);
       };
 
-     delete XMatrix; 
-     delete GMatrix; 
+     delete XMatrix;
+     delete GMatrix;
      fclose(f);
 
    };
