@@ -20,9 +20,9 @@
 /*
  * scuff-neq   -- a standalone code within the scuff-em suite
  *             -- for implementing the fluctuating-surface-current
- *             -- approach to nonequilibrium phenomena (more 
- *             -- specifically, for computing heat radiation, 
- *             -- heat transfer, and nonequilibrium casimir forces) 
+ *             -- approach to nonequilibrium phenomena (more
+ *             -- specifically, for computing heat radiation,
+ *             -- heat transfer, and nonequilibrium casimir forces)
  *
  * homer reid  -- 5/2012
  *
@@ -38,7 +38,7 @@
 /***************************************************************/
 /***************************************************************/
 /***************************************************************/
-#define MAXFREQ  10    // max number of frequencies 
+#define MAXFREQ  10    // max number of frequencies
 #define MAXCACHE 10    // max number of cache files for preload
 
 #define MAXSTR   1000
@@ -100,21 +100,21 @@ int main(int argc, char *argv[])
 
   /* name               type    #args  max_instances  storage           count         description*/
   OptStruct OSArray[]=
-   { 
+   {
      {"Geometry",       PA_STRING,  1, 1,       (void *)&GeoFile,    0,             "geometry file"},
      {"TransFile",      PA_STRING,  1, 1,       (void *)&TransFile,  0,             "list of geometrical transformation"},
 /**/
      {"SourceObject",   PA_STRING,  1, 1,       (void *)&SourceObject, 0,           "label of source object"},
      {"DestObject",     PA_STRING,  1, 1,       (void *)&DestObject, 0,             "label of destination object"},
-/**/     
+/**/
      {"EPFile",         PA_STRING,  1, 1,       (void *)&EPFile, 0,             "list of evaluation points for spatially-resolved flux"},
-/**/     
+/**/
      {"Omega",          PA_CDOUBLE, 1, MAXFREQ, (void *)OmegaVals,   &nOmegaVals,   "(angular) frequency"},
      {"OmegaFile",      PA_STRING,  1, 1,       (void *)&OmegaFile,  &nOmegaFiles,  "list of (angular) frequencies"},
      {"OmegaKBFile",    PA_STRING,  1, 1,       (void *)&OmegaKBFile, 0,             "list of (Omega, kx, ky) points"},
 /**/
      {"FileBase",       PA_STRING,  1, 1,       (void *)&FileBase,   0,             "prefix for names of .log, .flux, .out files"},
-/**/     
+/**/
      {"PlotFlux",       PA_BOOL,    0, 1,       (void *)&PlotFlux,   0,             "write spatially-resolved flux data"},
      {"OmitSelfTerms",  PA_BOOL,    0, 1,       (void *)&OmitSelfTerms,   0,             "write spatially-resolved flux data"},
 /**/
@@ -130,7 +130,7 @@ int main(int argc, char *argv[])
      {"Cache",          PA_STRING,  1, 1,       (void *)&Cache,      0,             "read/write cache"},
      {"ReadCache",      PA_STRING,  1, MAXCACHE,(void *)ReadCache,   &nReadCache,   "read cache"},
      {"WriteCache",     PA_STRING,  1, 1,       (void *)&WriteCache, 0,             "write cache"},
-/**/     
+/**/
      {0,0,0,0,0,0,0}
    };
   ProcessOptions(argc, argv, OSArray);
@@ -167,7 +167,7 @@ int main(int argc, char *argv[])
   if (NumPFTMethods==0 && EPFile==0)
    PFTMethods[NumPFTMethods++] = SCUFF_PFT_EMT;
 
-  if (DSIMesh) 
+  if (DSIMesh)
    PlotFlux=true;
 
   /*******************************************************************/
@@ -187,7 +187,7 @@ int main(int argc, char *argv[])
   HVector *OmegaPoints=0, *OmegaPoints0;
   int NumFreqs=0;
   if (nOmegaFiles==1) // first process --OmegaFile option if present
-   { 
+   {
      OmegaPoints=new HVector(OmegaFile,LHM_TEXT);
      if (OmegaPoints->ErrMsg)
       ErrExit(OmegaPoints->ErrMsg);
@@ -197,7 +197,7 @@ int main(int argc, char *argv[])
 
   // now add any individually specified --Omega options
   if (nOmegaVals>0)
-   { 
+   {
      NumFreqs += nOmegaVals;
      OmegaPoints0=OmegaPoints;
      OmegaPoints=new HVector(NumFreqs, LHM_COMPLEX);
@@ -229,7 +229,7 @@ int main(int argc, char *argv[])
 
   if (OmegaKBPoints && !G->LBasis)
    ErrExit("--OmegaKBPoints may only be used with extended geometries");
-  else if (G->LBasis && !OmegaKBPoints==0)
+  else if (G->LBasis && !OmegaKBPoints)
    ErrExit("--OmegaKBPoints is required for extended geometries");
 
   SNEQD->SourceOnly=-1;
@@ -246,7 +246,7 @@ int main(int argc, char *argv[])
       ErrExit("geometry contains no object with label %s",DestObject);
      Log("Computing only PFT quantities for object %s.",DestObject);
    };
-         
+
   /*******************************************************************/
   /* preload the scuff cache with any cache preload files the user   */
   /* may have specified                                              */
@@ -265,8 +265,8 @@ int main(int argc, char *argv[])
   /*******************************************************************/
   if (OmegaKBPoints)
    { for (int nok=0; nok<OmegaKBPoints->NR; nok++)
-      {  
-        cdouble Omega; 
+      {
+        cdouble Omega;
         double kBloch[2];
         Omega     = OmegaKBPoints->GetEntryD(nok, 0);
         kBloch[0] = OmegaKBPoints->GetEntryD(nok, 1);
