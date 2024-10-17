@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- * 
+ *
  */
 
 /***************************************************************/
@@ -73,7 +73,7 @@ static integer c__0 = 0;
 /* >>>  ZBSUBS.FOR:  Double precision subroutines */
 /* ----------------------------------------------------------------- */
 
-/* Subroutine */ int zbesh_(doublereal *zr, doublereal *zi, doublereal *fnu, 
+/* Subroutine */ int zbesh_(doublereal *zr, doublereal *zi, doublereal *fnu,
 	integer *kode, integer *m, integer *n, doublereal *cyr, doublereal *
 	cyi, integer *nz, integer *ierr)
 {
@@ -86,7 +86,7 @@ static integer c__0 = 0;
     doublereal d__1, d__2;
 
     /* Builtin functions */
-    double sqrt(doublereal), log(doublereal), d_sign(doublereal *, doublereal 
+    double sqrt(doublereal), log(doublereal), d_sign(doublereal *, doublereal
 	    *), cos(doublereal), sin(doublereal);
 
     /* Local variables */
@@ -104,20 +104,20 @@ static integer c__0 = 0;
     doublereal atol, rhpi;
     integer inuh;
     doublereal fnul, rtol, ascle, csgni;
-    extern /* Subroutine */ int zacon_(doublereal *, doublereal *, doublereal 
-	    *, integer *, integer *, integer *, doublereal *, doublereal *, 
+    extern /* Subroutine */ int zacon_(doublereal *, doublereal *, doublereal
+	    *, integer *, integer *, integer *, doublereal *, doublereal *,
 	    integer *, doublereal *, doublereal *, doublereal *, doublereal *,
 	     doublereal *);
     doublereal csgnr;
-    extern /* Subroutine */ int zbknu_(doublereal *, doublereal *, doublereal 
-	    *, integer *, integer *, doublereal *, doublereal *, integer *, 
-	    doublereal *, doublereal *, doublereal *), zbunk_(doublereal *, 
-	    doublereal *, doublereal *, integer *, integer *, integer *, 
+    extern /* Subroutine */ int zbknu_(doublereal *, doublereal *, doublereal
+	    *, integer *, integer *, doublereal *, doublereal *, integer *,
+	    doublereal *, doublereal *, doublereal *), zbunk_(doublereal *,
+	    doublereal *, doublereal *, integer *, integer *, integer *,
 	    doublereal *, doublereal *, integer *, doublereal *, doublereal *,
 	     doublereal *);
     extern doublereal d1mach_(integer *);
-    extern /* Subroutine */ int zuoik_(doublereal *, doublereal *, doublereal 
-	    *, integer *, integer *, integer *, doublereal *, doublereal *, 
+    extern /* Subroutine */ int zuoik_(doublereal *, doublereal *, doublereal
+	    *, integer *, integer *, integer *, doublereal *, doublereal *,
 	    integer *, doublereal *, doublereal *, doublereal *);
     extern integer i1mach_(integer *);
 
@@ -533,7 +533,7 @@ L260:
     return 0;
 } /* zbesh_ */
 
-/* Subroutine */ int zbesi_(doublereal *zr, doublereal *zi, doublereal *fnu, 
+/* Subroutine */ int zbesi_(doublereal *zr, doublereal *zi, doublereal *fnu,
 	integer *kode, integer *n, doublereal *cyr, doublereal *cyi, integer *
 	nz, integer *ierr)
 {
@@ -559,9 +559,9 @@ L260:
     doublereal tol, sti, zni, str, znr, alim, elim;
     extern doublereal zabs_(doublereal *, doublereal *);
     doublereal atol, fnul, rtol, ascle, csgni, csgnr;
-    extern /* Subroutine */ int zbinu_(doublereal *, doublereal *, doublereal 
-	    *, integer *, integer *, doublereal *, doublereal *, integer *, 
-	    doublereal *, doublereal *, doublereal *, doublereal *, 
+    extern /* Subroutine */ int zbinu_(doublereal *, doublereal *, doublereal
+	    *, integer *, integer *, doublereal *, doublereal *, integer *,
+	    doublereal *, doublereal *, doublereal *, doublereal *,
 	    doublereal *);
     extern doublereal d1mach_(integer *);
     extern integer i1mach_(integer *);
@@ -878,7 +878,7 @@ L260:
     return 0;
 } /* zbesi_ */
 
-/* Subroutine */ int zbesj_(doublereal *zr, doublereal *zi, doublereal *fnu, 
+/* Subroutine */ int zbesj_(doublereal *zr, doublereal *zi, doublereal *fnu,
 	integer *kode, integer *n, doublereal *cyr, doublereal *cyi, integer *
 	nz, integer *ierr)
 {
@@ -906,9 +906,9 @@ L260:
     doublereal atol;
     integer inuh;
     doublereal fnul, rtol, ascle, csgni, csgnr;
-    extern /* Subroutine */ int zbinu_(doublereal *, doublereal *, doublereal 
-	    *, integer *, integer *, doublereal *, doublereal *, integer *, 
-	    doublereal *, doublereal *, doublereal *, doublereal *, 
+    extern /* Subroutine */ int zbinu_(doublereal *, doublereal *, doublereal
+	    *, integer *, integer *, doublereal *, doublereal *, integer *,
+	    doublereal *, doublereal *, doublereal *, doublereal *,
 	    doublereal *);
     extern doublereal d1mach_(integer *);
     extern integer i1mach_(integer *);
@@ -1219,7 +1219,7 @@ L260:
     return 0;
 } /* zbesj_ */
 
-/* Subroutine */ int zbesk_(doublereal *zr, doublereal *zi, doublereal *fnu, 
+/* Subroutine */ int zbesk_(doublereal *zr, doublereal *zi, doublereal *fnu,
 	integer *kode, integer *n, doublereal *cyr, doublereal *cyi, integer *
 	nz, integer *ierr)
 {
@@ -1241,18 +1241,18 @@ L260:
     doublereal tol, alim, elim;
     extern doublereal zabs_(doublereal *, doublereal *);
     doublereal fnul;
-    extern /* Subroutine */ int zacon_(doublereal *, doublereal *, doublereal 
-	    *, integer *, integer *, integer *, doublereal *, doublereal *, 
+    extern /* Subroutine */ int zacon_(doublereal *, doublereal *, doublereal
+	    *, integer *, integer *, integer *, doublereal *, doublereal *,
 	    integer *, doublereal *, doublereal *, doublereal *, doublereal *,
-	     doublereal *), zbknu_(doublereal *, doublereal *, doublereal *, 
-	    integer *, integer *, doublereal *, doublereal *, integer *, 
-	    doublereal *, doublereal *, doublereal *), zbunk_(doublereal *, 
-	    doublereal *, doublereal *, integer *, integer *, integer *, 
+	     doublereal *), zbknu_(doublereal *, doublereal *, doublereal *,
+	    integer *, integer *, doublereal *, doublereal *, integer *,
+	    doublereal *, doublereal *, doublereal *), zbunk_(doublereal *,
+	    doublereal *, doublereal *, integer *, integer *, integer *,
 	    doublereal *, doublereal *, integer *, doublereal *, doublereal *,
 	     doublereal *);
     extern doublereal d1mach_(integer *);
-    extern /* Subroutine */ int zuoik_(doublereal *, doublereal *, doublereal 
-	    *, integer *, integer *, integer *, doublereal *, doublereal *, 
+    extern /* Subroutine */ int zuoik_(doublereal *, doublereal *, doublereal
+	    *, integer *, integer *, integer *, doublereal *, doublereal *,
 	    integer *, doublereal *, doublereal *, doublereal *);
     extern integer i1mach_(integer *);
 
@@ -1599,7 +1599,7 @@ L260:
     return 0;
 } /* zbesk_ */
 
-/* Subroutine */ int zbesy_(doublereal *zr, doublereal *zi, doublereal *fnu, 
+/* Subroutine */ int zbesy_(doublereal *zr, doublereal *zi, doublereal *fnu,
 	integer *kode, integer *n, doublereal *cyr, doublereal *cyi, integer *
 	nz, doublereal *cwrkr, doublereal *cwrki, integer *ierr)
 {
@@ -1620,14 +1620,14 @@ L260:
     integer i__, k, k1, i4, k2;
     doublereal ey;
     integer nz1, nz2;
-    doublereal d1m5, arg, exi, exr, sti, tay, tol, zni, zui, str, znr, zvi, 
+    doublereal d1m5, arg, exi, exr, sti, tay, tol, zni, zui, str, znr, zvi,
 	    zzi, zur, zvr, zzr, elim, ffnu, atol, rhpi;
     integer ifnu;
     doublereal rtol, ascle, csgni, csgnr, cspni;
-    extern /* Subroutine */ int zbesi_(doublereal *, doublereal *, doublereal 
-	    *, integer *, integer *, doublereal *, doublereal *, integer *, 
-	    integer *), zbesk_(doublereal *, doublereal *, doublereal *, 
-	    integer *, integer *, doublereal *, doublereal *, integer *, 
+    extern /* Subroutine */ int zbesi_(doublereal *, doublereal *, doublereal
+	    *, integer *, integer *, doublereal *, doublereal *, integer *,
+	    integer *), zbesk_(doublereal *, doublereal *, doublereal *,
+	    integer *, integer *, doublereal *, doublereal *, integer *,
 	    integer *);
     doublereal cspnr;
     extern doublereal d1mach_(integer *);
@@ -1961,8 +1961,8 @@ L90:
     return 0;
 } /* zbesy_ */
 
-/* Subroutine */ int zairy_(doublereal *zr, doublereal *zi, integer *id, 
-	integer *kode, doublereal *air, doublereal *aii, integer *nz, integer 
+/* Subroutine */ int zairy_(doublereal *zr, doublereal *zi, integer *id,
+	integer *kode, doublereal *air, doublereal *aii, integer *nz, integer
 	*ierr)
 {
     /* Initialized data */
@@ -2000,15 +2000,15 @@ L90:
 	    , doublereal *);
     doublereal trm1i, trm2i, trm1r, trm2r;
     integer iflag;
-    extern /* Subroutine */ int zacai_(doublereal *, doublereal *, doublereal 
-	    *, integer *, integer *, integer *, doublereal *, doublereal *, 
+    extern /* Subroutine */ int zacai_(doublereal *, doublereal *, doublereal
+	    *, integer *, integer *, integer *, doublereal *, doublereal *,
 	    integer *, doublereal *, doublereal *, doublereal *, doublereal *)
-	    , zbknu_(doublereal *, doublereal *, doublereal *, integer *, 
-	    integer *, doublereal *, doublereal *, integer *, doublereal *, 
+	    , zbknu_(doublereal *, doublereal *, doublereal *, integer *,
+	    integer *, doublereal *, doublereal *, integer *, doublereal *,
 	    doublereal *, doublereal *);
     extern doublereal d1mach_(integer *);
     extern integer i1mach_(integer *);
-    extern /* Subroutine */ int zsqrt_(doublereal *, doublereal *, doublereal 
+    extern /* Subroutine */ int zsqrt_(doublereal *, doublereal *, doublereal
 	    *, doublereal *);
 
 /* ***BEGIN PROLOGUE  ZAIRY */
@@ -2465,7 +2465,7 @@ L260:
     return 0;
 } /* zairy_ */
 
-/* Subroutine */ int zbiry_(doublereal *zr, doublereal *zi, integer *id, 
+/* Subroutine */ int zbiry_(doublereal *zr, doublereal *zi, integer *id,
 	integer *kode, doublereal *bir, doublereal *bii, integer *ierr)
 {
     /* Initialized data */
@@ -2492,20 +2492,20 @@ L260:
     integer k1, k2;
     doublereal aa, bb, ad, cc, ak, bk, ck, dk, az, rl;
     integer nz;
-    doublereal s1i, az3, s2i, s1r, s2r, z3i, z3r, eaa, fid, dig, cyi[2], fmr, 
+    doublereal s1i, az3, s2i, s1r, s2r, z3i, z3r, eaa, fid, dig, cyi[2], fmr,
 	    r1m5, fnu, cyr[2], tol, sti, str, sfac, alim, elim;
     extern doublereal zabs_(doublereal *, doublereal *);
     doublereal csqi, atrm, fnul, ztai, csqr;
     extern /* Subroutine */ int zdiv_(doublereal *, doublereal *, doublereal *
 	    , doublereal *, doublereal *, doublereal *);
     doublereal ztar, trm1i, trm2i, trm1r, trm2r;
-    extern /* Subroutine */ int zbinu_(doublereal *, doublereal *, doublereal 
-	    *, integer *, integer *, doublereal *, doublereal *, integer *, 
-	    doublereal *, doublereal *, doublereal *, doublereal *, 
+    extern /* Subroutine */ int zbinu_(doublereal *, doublereal *, doublereal
+	    *, integer *, integer *, doublereal *, doublereal *, integer *,
+	    doublereal *, doublereal *, doublereal *, doublereal *,
 	    doublereal *);
     extern doublereal d1mach_(integer *);
     extern integer i1mach_(integer *);
-    extern /* Subroutine */ int zsqrt_(doublereal *, doublereal *, doublereal 
+    extern /* Subroutine */ int zsqrt_(doublereal *, doublereal *, doublereal
 	    *, doublereal *);
 
 /* ***BEGIN PROLOGUE  ZBIRY */
@@ -2919,7 +2919,7 @@ L260:
     return 0;
 } /* zbiry_ */
 
-/* Subroutine */ int zmlt_(doublereal *ar, doublereal *ai, doublereal *br, 
+/* Subroutine */ int zmlt_(doublereal *ar, doublereal *ai, doublereal *br,
 	doublereal *bi, doublereal *cr, doublereal *ci)
 {
     doublereal ca, cb;
@@ -2938,7 +2938,7 @@ L260:
     return 0;
 } /* zmlt_ */
 
-/* Subroutine */ int zdiv_(doublereal *ar, doublereal *ai, doublereal *br, 
+/* Subroutine */ int zdiv_(doublereal *ar, doublereal *ai, doublereal *br,
 	doublereal *bi, doublereal *cr, doublereal *ci)
 {
     doublereal ca, cb, cc, cd, bm;
@@ -2961,7 +2961,7 @@ L260:
     return 0;
 } /* zdiv_ */
 
-/* Subroutine */ int zsqrt_(doublereal *ar, doublereal *ai, doublereal *br, 
+/* Subroutine */ int zsqrt_(doublereal *ar, doublereal *ai, doublereal *br,
 	doublereal *bi)
 {
     /* Initialized data */
@@ -3042,7 +3042,7 @@ L70:
     return 0;
 } /* zsqrt_ */
 
-/* Subroutine */ int zexp_(doublereal *ar, doublereal *ai, doublereal *br, 
+/* Subroutine */ int zexp_(doublereal *ar, doublereal *ai, doublereal *br,
 	doublereal *bi)
 {
     /* Builtin functions */
@@ -3066,7 +3066,7 @@ L70:
     return 0;
 } /* zexp_ */
 
-/* Subroutine */ int zlog_(doublereal *ar, doublereal *ai, doublereal *br, 
+/* Subroutine */ int zlog_(doublereal *ar, doublereal *ai, doublereal *br,
 	doublereal *bi, integer *ierr)
 {
     /* Initialized data */
@@ -3188,7 +3188,7 @@ L20:
     return ret_val;
 } /* zabs_ */
 
-/* Subroutine */ int zbknu_(doublereal *zr, doublereal *zi, doublereal *fnu, 
+/* Subroutine */ int zbknu_(doublereal *zr, doublereal *zi, doublereal *fnu,
 	integer *kode, integer *n, doublereal *yr, doublereal *yi, integer *
 	nz, doublereal *tol, doublereal *elim, doublereal *alim)
 {
@@ -3228,8 +3228,8 @@ L20:
     integer kk;
     doublereal fr, pi, qi, tm, pr, qr;
     integer nw;
-    doublereal p1i, p2i, s1i, s2i, p2m, p1r, p2r, s1r, s2r, cbi, cbr, cki, 
-	    caz, csi, ckr, fhs, fks, rak, czi, dnu, csr, elm, zdi, bry[3], 
+    doublereal p1i, p2i, s1i, s2i, p2m, p1r, p2r, s1r, s2r, cbi, cbr, cki,
+	    caz, csi, ckr, fhs, fks, rak, czi, dnu, csr, elm, zdi, bry[3],
 	    pti, czr, sti, zdr, cyr[2], rzi, ptr, cyi[2];
     integer inu;
     doublereal str, rzr, dnu2, cchi, cchr, alas, cshi;
@@ -3243,23 +3243,23 @@ L20:
 	    , doublereal *, doublereal *, doublereal *);
     doublereal smur;
     extern /* Subroutine */ int zexp_(doublereal *, doublereal *, doublereal *
-	    , doublereal *), zmlt_(doublereal *, doublereal *, doublereal *, 
+	    , doublereal *), zmlt_(doublereal *, doublereal *, doublereal *,
 	    doublereal *, doublereal *, doublereal *);
     integer iflag, kflag;
     doublereal coefi;
     integer koded;
     doublereal ascle, coefr, helim, celmr, csclr, crscr;
-    extern /* Subroutine */ int zshch_(doublereal *, doublereal *, doublereal 
+    extern /* Subroutine */ int zshch_(doublereal *, doublereal *, doublereal
 	    *, doublereal *, doublereal *, doublereal *);
     doublereal etest;
-    extern /* Subroutine */ int zuchk_(doublereal *, doublereal *, integer *, 
-	    doublereal *, doublereal *), zkscl_(doublereal *, doublereal *, 
-	    doublereal *, integer *, doublereal *, doublereal *, integer *, 
-	    doublereal *, doublereal *, doublereal *, doublereal *, 
+    extern /* Subroutine */ int zuchk_(doublereal *, doublereal *, integer *,
+	    doublereal *, doublereal *), zkscl_(doublereal *, doublereal *,
+	    doublereal *, integer *, doublereal *, doublereal *, integer *,
+	    doublereal *, doublereal *, doublereal *, doublereal *,
 	    doublereal *);
     extern doublereal d1mach_(integer *);
     extern integer i1mach_(integer *);
-    extern /* Subroutine */ int zsqrt_(doublereal *, doublereal *, doublereal 
+    extern /* Subroutine */ int zsqrt_(doublereal *, doublereal *, doublereal
 	    *, doublereal *);
     extern doublereal dgamln_(doublereal *, integer *);
 
@@ -3886,7 +3886,7 @@ L270:
     yi[2] = s2i;
 L280:
     ascle = bry[0];
-    zkscl_(&zdr, &zdi, fnu, n, &yr[1], &yi[1], nz, &rzr, &rzi, &ascle, tol, 
+    zkscl_(&zdr, &zdi, fnu, n, &yr[1], &yi[1], nz, &rzr, &rzi, &ascle, tol,
 	    elim);
     inu = *n - *nz;
     if (inu <= 0) {
@@ -3957,14 +3957,14 @@ L310:
     integer i__, ic;
     doublereal as, fn;
     integer kk, nn, nw;
-    doublereal s1i, s2i, s1r, s2r, acs, cki, elm, csi, ckr, cyi[2], zdi, csr, 
+    doublereal s1i, s2i, s1r, s2r, acs, cki, elm, csi, ckr, cyi[2], zdi, csr,
 	    cyr[2], zdr, str, alas;
     integer idum;
     extern doublereal zabs_(doublereal *, doublereal *);
     extern /* Subroutine */ int zlog_(doublereal *, doublereal *, doublereal *
 	    , doublereal *, integer *);
     doublereal helim, celmr;
-    extern /* Subroutine */ int zuchk_(doublereal *, doublereal *, integer *, 
+    extern /* Subroutine */ int zuchk_(doublereal *, doublereal *, integer *,
 	    doublereal *, doublereal *);
 
 /* ***BEGIN PROLOGUE  ZKSCL */
@@ -4116,7 +4116,7 @@ L45:
     return 0;
 } /* zkscl_ */
 
-/* Subroutine */ int zshch_(doublereal *zr, doublereal *zi, doublereal *cshr, 
+/* Subroutine */ int zshch_(doublereal *zr, doublereal *zi, doublereal *cshr,
 	doublereal *cshi, doublereal *cchr, doublereal *cchi)
 {
     /* Builtin functions */
@@ -4146,7 +4146,7 @@ L45:
     return 0;
 } /* zshch_ */
 
-/* Subroutine */ int zrati_(doublereal *zr, doublereal *zi, doublereal *fnu, 
+/* Subroutine */ int zrati_(doublereal *zr, doublereal *zi, doublereal *fnu,
 	integer *n, doublereal *cyr, doublereal *cyi, doublereal *tol)
 {
     /* Initialized data */
@@ -4329,7 +4329,7 @@ L50:
 } /* zrati_ */
 
 /* Subroutine */ int zs1s2_(doublereal *zrr, doublereal *zri, doublereal *s1r,
-	 doublereal *s1i, doublereal *s2r, doublereal *s2i, integer *nz, 
+	 doublereal *s1i, doublereal *s2r, doublereal *s2i, integer *nz,
 	doublereal *ascle, doublereal *alim, integer *iuf)
 {
     /* Initialized data */
@@ -4345,7 +4345,7 @@ L50:
     integer idum;
     extern doublereal zabs_(doublereal *, doublereal *);
     extern /* Subroutine */ int zlog_(doublereal *, doublereal *, doublereal *
-	    , doublereal *, integer *), zexp_(doublereal *, doublereal *, 
+	    , doublereal *, integer *), zexp_(doublereal *, doublereal *,
 	    doublereal *, doublereal *);
 
 /* ***BEGIN PROLOGUE  ZS1S2 */
@@ -4400,16 +4400,16 @@ L10:
     return 0;
 } /* zs1s2_ */
 
-/* Subroutine */ int zbunk_(doublereal *zr, doublereal *zi, doublereal *fnu, 
+/* Subroutine */ int zbunk_(doublereal *zr, doublereal *zi, doublereal *fnu,
 	integer *kode, integer *mr, integer *n, doublereal *yr, doublereal *
 	yi, integer *nz, doublereal *tol, doublereal *elim, doublereal *alim)
 {
     doublereal ax, ay;
-    extern /* Subroutine */ int zunk1_(doublereal *, doublereal *, doublereal 
-	    *, integer *, integer *, integer *, doublereal *, doublereal *, 
+    extern /* Subroutine */ int zunk1_(doublereal *, doublereal *, doublereal
+	    *, integer *, integer *, integer *, doublereal *, doublereal *,
 	    integer *, doublereal *, doublereal *, doublereal *), zunk2_(
-	    doublereal *, doublereal *, doublereal *, integer *, integer *, 
-	    integer *, doublereal *, doublereal *, integer *, doublereal *, 
+	    doublereal *, doublereal *, doublereal *, integer *, integer *,
+	    integer *, doublereal *, doublereal *, integer *, doublereal *,
 	    doublereal *, doublereal *);
 
 /* ***BEGIN PROLOGUE  ZBUNK */
@@ -4451,7 +4451,7 @@ L20:
     return 0;
 } /* zbunk_ */
 
-/* Subroutine */ int zmlri_(doublereal *zr, doublereal *zi, doublereal *fnu, 
+/* Subroutine */ int zmlri_(doublereal *zr, doublereal *zi, doublereal *fnu,
 	integer *kode, integer *n, doublereal *yr, doublereal *yi, integer *
 	nz, doublereal *tol)
 {
@@ -4486,7 +4486,7 @@ L20:
 	    , doublereal *, integer *);
     doublereal sumi, sumr;
     extern /* Subroutine */ int zexp_(doublereal *, doublereal *, doublereal *
-	    , doublereal *), zmlt_(doublereal *, doublereal *, doublereal *, 
+	    , doublereal *), zmlt_(doublereal *, doublereal *, doublereal *,
 	    doublereal *, doublereal *, doublereal *);
     integer itime;
     extern doublereal d1mach_(integer *), dgamln_(doublereal *, integer *);
@@ -4737,13 +4737,13 @@ L110:
 
     /* Local variables */
     integer i__, nw;
-    doublereal c1i, c2i, c1r, c2r, act, acw, cti, ctr, pti, sti, ptr, str, 
+    doublereal c1i, c2i, c1r, c2r, act, acw, cti, ctr, pti, sti, ptr, str,
 	    ract;
     extern doublereal zabs_(doublereal *, doublereal *);
     doublereal ascle, csclr, cinui, cinur;
-    extern /* Subroutine */ int zbknu_(doublereal *, doublereal *, doublereal 
-	    *, integer *, integer *, doublereal *, doublereal *, integer *, 
-	    doublereal *, doublereal *, doublereal *), zrati_(doublereal *, 
+    extern /* Subroutine */ int zbknu_(doublereal *, doublereal *, doublereal
+	    *, integer *, integer *, doublereal *, doublereal *, integer *,
+	    doublereal *, doublereal *, doublereal *), zrati_(doublereal *,
 	    doublereal *, doublereal *, integer *, doublereal *, doublereal *,
 	     doublereal *);
     extern doublereal d1mach_(integer *);
@@ -4858,7 +4858,7 @@ L50:
     return 0;
 } /* zwrsk_ */
 
-/* Subroutine */ int zseri_(doublereal *zr, doublereal *zi, doublereal *fnu, 
+/* Subroutine */ int zseri_(doublereal *zr, doublereal *zi, doublereal *fnu,
 	integer *kode, integer *n, doublereal *yr, doublereal *yi, integer *
 	nz, doublereal *tol, doublereal *elim, doublereal *alim)
 {
@@ -4886,19 +4886,19 @@ L50:
     integer nn;
     doublereal wi[2], rs, ss;
     integer nw;
-    doublereal wr[2], s1i, s2i, s1r, s2r, cki, acz, arm, ckr, czi, hzi, raz, 
+    doublereal wr[2], s1i, s2i, s1r, s2r, cki, acz, arm, ckr, czi, hzi, raz,
 	    czr, sti, hzr, rzi, str, rzr, ak1i, ak1r, rtr1, dfnu;
     integer idum;
     extern doublereal zabs_(doublereal *, doublereal *);
     doublereal atol, fnup;
     extern /* Subroutine */ int zlog_(doublereal *, doublereal *, doublereal *
-	    , doublereal *, integer *), zdiv_(doublereal *, doublereal *, 
+	    , doublereal *, integer *), zdiv_(doublereal *, doublereal *,
 	    doublereal *, doublereal *, doublereal *, doublereal *), zmlt_(
-	    doublereal *, doublereal *, doublereal *, doublereal *, 
+	    doublereal *, doublereal *, doublereal *, doublereal *,
 	    doublereal *, doublereal *);
     integer iflag;
     doublereal coefi, ascle, coefr, crscr;
-    extern /* Subroutine */ int zuchk_(doublereal *, doublereal *, integer *, 
+    extern /* Subroutine */ int zuchk_(doublereal *, doublereal *, integer *,
 	    doublereal *, doublereal *);
     extern doublereal d1mach_(integer *), dgamln_(doublereal *, integer *);
 
@@ -5139,7 +5139,7 @@ L190:
     return 0;
 } /* zseri_ */
 
-/* Subroutine */ int zasyi_(doublereal *zr, doublereal *zi, doublereal *fnu, 
+/* Subroutine */ int zasyi_(doublereal *zr, doublereal *zi, doublereal *fnu,
 	integer *kode, integer *n, doublereal *yr, doublereal *yi, integer *
 	nz, doublereal *rl, doublereal *tol, doublereal *elim, doublereal *
 	alim)
@@ -5168,21 +5168,21 @@ L190:
     integer il, jl;
     doublereal az;
     integer nn;
-    doublereal p1i, s2i, p1r, s2r, cki, dki, fdn, arg, aez, arm, ckr, dkr, 
+    doublereal p1i, s2i, p1r, s2r, cki, dki, fdn, arg, aez, arm, ckr, dkr,
 	    czi, ezi, sgn;
     integer inu;
-    doublereal raz, czr, ezr, sqk, sti, rzi, tzi, str, rzr, tzr, ak1i, ak1r, 
+    doublereal raz, czr, ezr, sqk, sti, rzi, tzi, str, rzr, tzr, ak1i, ak1r,
 	    cs1i, cs2i, cs1r, cs2r, dnu2, rtr1, dfnu;
     extern doublereal zabs_(doublereal *, doublereal *);
     doublereal atol;
     extern /* Subroutine */ int zdiv_(doublereal *, doublereal *, doublereal *
-	    , doublereal *, doublereal *, doublereal *), zexp_(doublereal *, 
-	    doublereal *, doublereal *, doublereal *), zmlt_(doublereal *, 
-	    doublereal *, doublereal *, doublereal *, doublereal *, 
+	    , doublereal *, doublereal *, doublereal *), zexp_(doublereal *,
+	    doublereal *, doublereal *, doublereal *), zmlt_(doublereal *,
+	    doublereal *, doublereal *, doublereal *, doublereal *,
 	    doublereal *);
     integer koded;
     extern doublereal d1mach_(integer *);
-    extern /* Subroutine */ int zsqrt_(doublereal *, doublereal *, doublereal 
+    extern /* Subroutine */ int zsqrt_(doublereal *, doublereal *, doublereal
 	    *, doublereal *);
 
 /* ***BEGIN PROLOGUE  ZASYI */
@@ -5381,8 +5381,8 @@ L110:
     return 0;
 } /* zasyi_ */
 
-/* Subroutine */ int zuoik_(doublereal *zr, doublereal *zi, doublereal *fnu, 
-	integer *kode, integer *ikflg, integer *n, doublereal *yr, doublereal 
+/* Subroutine */ int zuoik_(doublereal *zr, doublereal *zi, doublereal *fnu,
+	integer *kode, integer *ikflg, integer *n, doublereal *yr, doublereal
 	*yi, integer *nuf, doublereal *tol, doublereal *elim, doublereal *
 	alim)
 {
@@ -5402,7 +5402,7 @@ L110:
     integer i__;
     doublereal ax, ay;
     integer nn, nw;
-    doublereal fnn, gnn, zbi, czi, gnu, zbr, czr, rcz, sti, zni, zri, str, 
+    doublereal fnn, gnn, zbi, czi, gnu, zbr, czr, rcz, sti, zni, zri, str,
 	    znr, zrr, aarg, aphi, argi, phii, argr;
     integer idum;
     extern doublereal zabs_(doublereal *, doublereal *);
@@ -5413,18 +5413,18 @@ L110:
     doublereal sumi, sumr, ascle;
     integer iform;
     doublereal asumi, bsumi, cwrki[16];
-    extern /* Subroutine */ int zuchk_(doublereal *, doublereal *, integer *, 
+    extern /* Subroutine */ int zuchk_(doublereal *, doublereal *, integer *,
 	    doublereal *, doublereal *);
     doublereal asumr, bsumr, cwrkr[16];
     extern doublereal d1mach_(integer *);
-    extern /* Subroutine */ int zunhj_(doublereal *, doublereal *, doublereal 
-	    *, integer *, doublereal *, doublereal *, doublereal *, 
-	    doublereal *, doublereal *, doublereal *, doublereal *, 
-	    doublereal *, doublereal *, doublereal *, doublereal *, 
-	    doublereal *, doublereal *), zunik_(doublereal *, doublereal *, 
-	    doublereal *, integer *, integer *, doublereal *, integer *, 
-	    doublereal *, doublereal *, doublereal *, doublereal *, 
-	    doublereal *, doublereal *, doublereal *, doublereal *, 
+    extern /* Subroutine */ int zunhj_(doublereal *, doublereal *, doublereal
+	    *, integer *, doublereal *, doublereal *, doublereal *,
+	    doublereal *, doublereal *, doublereal *, doublereal *,
+	    doublereal *, doublereal *, doublereal *, doublereal *,
+	    doublereal *, doublereal *), zunik_(doublereal *, doublereal *,
+	    doublereal *, integer *, integer *, doublereal *, integer *,
+	    doublereal *, doublereal *, doublereal *, doublereal *,
+	    doublereal *, doublereal *, doublereal *, doublereal *,
 	    doublereal *, doublereal *);
     doublereal zeta1i, zeta2i, zeta1r, zeta2r;
 
@@ -5496,7 +5496,7 @@ L20:
 	goto L30;
     }
     init = 0;
-    zunik_(&zrr, &zri, &gnu, ikflg, &c__1, tol, &init, &phir, &phii, &zeta1r, 
+    zunik_(&zrr, &zri, &gnu, ikflg, &c__1, tol, &init, &phir, &phii, &zeta1r,
 	    &zeta1i, &zeta2r, &zeta2i, &sumr, &sumi, cwrkr, cwrki);
     czr = -zeta1r + zeta2r;
     czi = -zeta1i + zeta2i;
@@ -5509,7 +5509,7 @@ L30:
     }
     znr = -znr;
 L40:
-    zunhj_(&znr, &zni, &gnu, &c__1, tol, &phir, &phii, &argr, &argi, &zeta1r, 
+    zunhj_(&znr, &zni, &gnu, &c__1, tol, &phir, &phii, &argr, &argi, &zeta1r,
 	    &zeta1i, &zeta2r, &zeta2i, &asumr, &asumi, &bsumr, &bsumi);
     czr = -zeta1r + zeta2r;
     czi = -zeta1i + zeta2i;
@@ -5608,13 +5608,13 @@ L140:
 	goto L150;
     }
     init = 0;
-    zunik_(&zrr, &zri, &gnu, ikflg, &c__1, tol, &init, &phir, &phii, &zeta1r, 
+    zunik_(&zrr, &zri, &gnu, ikflg, &c__1, tol, &init, &phir, &phii, &zeta1r,
 	    &zeta1i, &zeta2r, &zeta2i, &sumr, &sumi, cwrkr, cwrki);
     czr = -zeta1r + zeta2r;
     czi = -zeta1i + zeta2i;
     goto L160;
 L150:
-    zunhj_(&znr, &zni, &gnu, &c__1, tol, &phir, &phii, &argr, &argi, &zeta1r, 
+    zunhj_(&znr, &zni, &gnu, &c__1, tol, &phir, &phii, &argr, &argi, &zeta1r,
 	    &zeta1i, &zeta2r, &zeta2i, &asumr, &asumi, &bsumr, &bsumi);
     czr = -zeta1r + zeta2r;
     czi = -zeta1i + zeta2i;
@@ -5676,9 +5676,9 @@ L210:
     return 0;
 } /* zuoik_ */
 
-/* Subroutine */ int zacon_(doublereal *zr, doublereal *zi, doublereal *fnu, 
+/* Subroutine */ int zacon_(doublereal *zr, doublereal *zi, doublereal *fnu,
 	integer *kode, integer *mr, integer *n, doublereal *yr, doublereal *
-	yi, integer *nz, doublereal *rl, doublereal *fnul, doublereal *tol, 
+	yi, integer *nz, doublereal *rl, doublereal *fnul, doublereal *tol,
 	doublereal *elim, doublereal *alim)
 {
     /* Initialized data */
@@ -5703,22 +5703,22 @@ L210:
     integer iuf;
     doublereal cyi[2], fmr, csr, azn, sgn;
     integer inu;
-    doublereal bry[3], cyr[2], pti, spn, sti, zni, rzi, ptr, str, znr, rzr, 
+    doublereal bry[3], cyr[2], pti, spn, sti, zni, rzi, ptr, str, znr, rzr,
 	    sc1i, sc2i, sc1r, sc2r, cscl, cscr;
     extern doublereal zabs_(doublereal *, doublereal *);
     doublereal csrr[3], cssr[3], razn;
-    extern /* Subroutine */ int zs1s2_(doublereal *, doublereal *, doublereal 
-	    *, doublereal *, doublereal *, doublereal *, integer *, 
-	    doublereal *, doublereal *, integer *), zmlt_(doublereal *, 
-	    doublereal *, doublereal *, doublereal *, doublereal *, 
+    extern /* Subroutine */ int zs1s2_(doublereal *, doublereal *, doublereal
+	    *, doublereal *, doublereal *, doublereal *, integer *,
+	    doublereal *, doublereal *, integer *), zmlt_(doublereal *,
+	    doublereal *, doublereal *, doublereal *, doublereal *,
 	    doublereal *);
     integer kflag;
     doublereal ascle, bscle, csgni, csgnr, cspni, cspnr;
-    extern /* Subroutine */ int zbinu_(doublereal *, doublereal *, doublereal 
-	    *, integer *, integer *, doublereal *, doublereal *, integer *, 
-	    doublereal *, doublereal *, doublereal *, doublereal *, 
-	    doublereal *), zbknu_(doublereal *, doublereal *, doublereal *, 
-	    integer *, integer *, doublereal *, doublereal *, integer *, 
+    extern /* Subroutine */ int zbinu_(doublereal *, doublereal *, doublereal
+	    *, integer *, integer *, doublereal *, doublereal *, integer *,
+	    doublereal *, doublereal *, doublereal *, doublereal *,
+	    doublereal *), zbknu_(doublereal *, doublereal *, doublereal *,
+	    integer *, integer *, doublereal *, doublereal *, integer *,
 	    doublereal *, doublereal *, doublereal *);
     extern doublereal d1mach_(integer *);
 
@@ -5746,7 +5746,7 @@ L210:
     znr = -(*zr);
     zni = -(*zi);
     nn = *n;
-    zbinu_(&znr, &zni, fnu, kode, &nn, &yr[1], &yi[1], &nw, rl, fnul, tol, 
+    zbinu_(&znr, &zni, fnu, kode, &nn, &yr[1], &yi[1], &nw, rl, fnul, tol,
 	    elim, alim);
     if (nw < 0) {
 	goto L90;
@@ -5955,7 +5955,7 @@ L90:
     return 0;
 } /* zacon_ */
 
-/* Subroutine */ int zbinu_(doublereal *zr, doublereal *zi, doublereal *fnu, 
+/* Subroutine */ int zbinu_(doublereal *zr, doublereal *zi, doublereal *fnu,
 	integer *kode, integer *n, doublereal *cyr, doublereal *cyi, integer *
 	nz, doublereal *rl, doublereal *fnul, doublereal *tol, doublereal *
 	elim, doublereal *alim)
@@ -5977,20 +5977,20 @@ L90:
     doublereal dfnu;
     extern doublereal zabs_(doublereal *, doublereal *);
     integer nlast;
-    extern /* Subroutine */ int zbuni_(doublereal *, doublereal *, doublereal 
-	    *, integer *, integer *, doublereal *, doublereal *, integer *, 
-	    integer *, integer *, doublereal *, doublereal *, doublereal *, 
-	    doublereal *), zseri_(doublereal *, doublereal *, doublereal *, 
-	    integer *, integer *, doublereal *, doublereal *, integer *, 
-	    doublereal *, doublereal *, doublereal *), zmlri_(doublereal *, 
-	    doublereal *, doublereal *, integer *, integer *, doublereal *, 
-	    doublereal *, integer *, doublereal *), zasyi_(doublereal *, 
-	    doublereal *, doublereal *, integer *, integer *, doublereal *, 
+    extern /* Subroutine */ int zbuni_(doublereal *, doublereal *, doublereal
+	    *, integer *, integer *, doublereal *, doublereal *, integer *,
+	    integer *, integer *, doublereal *, doublereal *, doublereal *,
+	    doublereal *), zseri_(doublereal *, doublereal *, doublereal *,
+	    integer *, integer *, doublereal *, doublereal *, integer *,
+	    doublereal *, doublereal *, doublereal *), zmlri_(doublereal *,
+	    doublereal *, doublereal *, integer *, integer *, doublereal *,
+	    doublereal *, integer *, doublereal *), zasyi_(doublereal *,
+	    doublereal *, doublereal *, integer *, integer *, doublereal *,
 	    doublereal *, integer *, doublereal *, doublereal *, doublereal *,
-	     doublereal *), zuoik_(doublereal *, doublereal *, doublereal *, 
-	    integer *, integer *, integer *, doublereal *, doublereal *, 
+	     doublereal *), zuoik_(doublereal *, doublereal *, doublereal *,
+	    integer *, integer *, integer *, doublereal *, doublereal *,
 	    integer *, doublereal *, doublereal *, doublereal *), zwrsk_(
-	    doublereal *, doublereal *, doublereal *, integer *, integer *, 
+	    doublereal *, doublereal *, doublereal *, integer *, integer *,
 	    doublereal *, doublereal *, integer *, doublereal *, doublereal *,
 	     doublereal *, doublereal *, doublereal *);
 
@@ -6060,7 +6060,7 @@ L50:
 /* ----------------------------------------------------------------------- */
 /*     OVERFLOW AND UNDERFLOW TEST ON I SEQUENCE FOR MILLER ALGORITHM */
 /* ----------------------------------------------------------------------- */
-    zuoik_(zr, zi, fnu, kode, &c__1, &nn, &cyr[1], &cyi[1], &nw, tol, elim, 
+    zuoik_(zr, zi, fnu, kode, &c__1, &nn, &cyr[1], &cyi[1], &nw, tol, elim,
 	    alim);
     if (nw < 0) {
 	goto L130;
@@ -6125,7 +6125,7 @@ L110:
 /* ----------------------------------------------------------------------- */
     nui = (integer) ((real) (*fnul - dfnu)) + 1;
     nui = MAX(nui,0);
-    zbuni_(zr, zi, fnu, kode, &nn, &cyr[1], &cyi[1], &nw, &nui, &nlast, fnul, 
+    zbuni_(zr, zi, fnu, kode, &nn, &cyr[1], &cyi[1], &nw, &nui, &nlast, fnul,
 	    tol, elim, alim);
     if (nw < 0) {
 	goto L130;
@@ -6334,9 +6334,9 @@ L70:
     return ret_val;
 } /* dgamln_ */
 
-/* Subroutine */ int zacai_(doublereal *zr, doublereal *zi, doublereal *fnu, 
+/* Subroutine */ int zacai_(doublereal *zr, doublereal *zi, doublereal *fnu,
 	integer *kode, integer *mr, integer *n, doublereal *yr, doublereal *
-	yi, integer *nz, doublereal *rl, doublereal *tol, doublereal *elim, 
+	yi, integer *nz, doublereal *rl, doublereal *tol, doublereal *elim,
 	doublereal *alim)
 {
     /* Initialized data */
@@ -6356,21 +6356,21 @@ L70:
     integer inu;
     doublereal cyr[2], zni, znr, dfnu;
     extern doublereal zabs_(doublereal *, doublereal *);
-    extern /* Subroutine */ int zs1s2_(doublereal *, doublereal *, doublereal 
-	    *, doublereal *, doublereal *, doublereal *, integer *, 
+    extern /* Subroutine */ int zs1s2_(doublereal *, doublereal *, doublereal
+	    *, doublereal *, doublereal *, doublereal *, integer *,
 	    doublereal *, doublereal *, integer *);
     doublereal ascle, csgni, csgnr, cspni, cspnr;
-    extern /* Subroutine */ int zbknu_(doublereal *, doublereal *, doublereal 
-	    *, integer *, integer *, doublereal *, doublereal *, integer *, 
-	    doublereal *, doublereal *, doublereal *), zseri_(doublereal *, 
-	    doublereal *, doublereal *, integer *, integer *, doublereal *, 
+    extern /* Subroutine */ int zbknu_(doublereal *, doublereal *, doublereal
+	    *, integer *, integer *, doublereal *, doublereal *, integer *,
+	    doublereal *, doublereal *, doublereal *), zseri_(doublereal *,
+	    doublereal *, doublereal *, integer *, integer *, doublereal *,
 	    doublereal *, integer *, doublereal *, doublereal *, doublereal *)
 	    ;
     extern doublereal d1mach_(integer *);
-    extern /* Subroutine */ int zmlri_(doublereal *, doublereal *, doublereal 
-	    *, integer *, integer *, doublereal *, doublereal *, integer *, 
-	    doublereal *), zasyi_(doublereal *, doublereal *, doublereal *, 
-	    integer *, integer *, doublereal *, doublereal *, integer *, 
+    extern /* Subroutine */ int zmlri_(doublereal *, doublereal *, doublereal
+	    *, integer *, integer *, doublereal *, doublereal *, integer *,
+	    doublereal *), zasyi_(doublereal *, doublereal *, doublereal *,
+	    integer *, integer *, doublereal *, doublereal *, integer *,
 	    doublereal *, doublereal *, doublereal *, doublereal *);
 
 /* ***BEGIN PROLOGUE  ZACAI */
@@ -6420,7 +6420,7 @@ L20:
 /* ----------------------------------------------------------------------- */
 /*     ASYMPTOTIC EXPANSION FOR LARGE Z FOR THE I FUNCTION */
 /* ----------------------------------------------------------------------- */
-    zasyi_(&znr, &zni, fnu, kode, &nn, &yr[1], &yi[1], &nw, rl, tol, elim, 
+    zasyi_(&znr, &zni, fnu, kode, &nn, &yr[1], &yi[1], &nw, rl, tol, elim,
 	    alim);
     if (nw < 0) {
 	goto L80;
@@ -6490,7 +6490,7 @@ L80:
     return 0;
 } /* zacai_ */
 
-/* Subroutine */ int zuchk_(doublereal *yr, doublereal *yi, integer *nz, 
+/* Subroutine */ int zuchk_(doublereal *yr, doublereal *yi, integer *nz,
 	doublereal *ascle, doublereal *tol)
 {
     doublereal wi, ss, st, wr;
@@ -6527,9 +6527,9 @@ L80:
 } /* zuchk_ */
 
 /* Subroutine */ int zunik_(doublereal *zrr, doublereal *zri, doublereal *fnu,
-	 integer *ikflg, integer *ipmtr, doublereal *tol, integer *init, 
+	 integer *ikflg, integer *ipmtr, doublereal *tol, integer *init,
 	doublereal *phir, doublereal *phii, doublereal *zeta1r, doublereal *
-	zeta1i, doublereal *zeta2r, doublereal *zeta2i, doublereal *sumr, 
+	zeta1i, doublereal *zeta2r, doublereal *zeta2i, doublereal *sumr,
 	doublereal *sumi, doublereal *cwrkr, doublereal *cwrki)
 {
     /* Initialized data */
@@ -6589,15 +6589,15 @@ L80:
 
     /* Local variables */
     integer i__, j, k, l;
-    doublereal ac, si, ti, sr, tr, t2i, t2r, rfn, sri, sti, zni, srr, str, 
+    doublereal ac, si, ti, sr, tr, t2i, t2r, rfn, sri, sti, zni, srr, str,
 	    znr;
     integer idum;
     extern /* Subroutine */ int zlog_(doublereal *, doublereal *, doublereal *
-	    , doublereal *, integer *), zdiv_(doublereal *, doublereal *, 
+	    , doublereal *, integer *), zdiv_(doublereal *, doublereal *,
 	    doublereal *, doublereal *, doublereal *, doublereal *);
     doublereal test, crfni, crfnr;
     extern doublereal d1mach_(integer *);
-    extern /* Subroutine */ int zsqrt_(doublereal *, doublereal *, doublereal 
+    extern /* Subroutine */ int zsqrt_(doublereal *, doublereal *, doublereal
 	    *, doublereal *);
 
 /* ***BEGIN PROLOGUE  ZUNIK */
@@ -6750,10 +6750,10 @@ L60:
     return 0;
 } /* zunik_ */
 
-/* Subroutine */ int zunhj_(doublereal *zr, doublereal *zi, doublereal *fnu, 
-	integer *ipmtr, doublereal *tol, doublereal *phir, doublereal *phii, 
+/* Subroutine */ int zunhj_(doublereal *zr, doublereal *zi, doublereal *fnu,
+	integer *ipmtr, doublereal *tol, doublereal *phir, doublereal *phii,
 	doublereal *argr, doublereal *argi, doublereal *zeta1r, doublereal *
-	zeta1i, doublereal *zeta2r, doublereal *zeta2i, doublereal *asumr, 
+	zeta1i, doublereal *zeta2r, doublereal *zeta2i, doublereal *asumr,
 	doublereal *asumi, doublereal *bsumr, doublereal *bsumi)
 {
     /* Initialized data */
@@ -7035,7 +7035,7 @@ L60:
     integer ias;
     doublereal cri[14], dri[14];
     integer ibs;
-    doublereal zai, zbi, zci, crr[14], drr[14], raw, zar, upi[14], sti, zbr, 
+    doublereal zai, zbi, zci, crr[14], drr[14], raw, zar, upi[14], sti, zbr,
 	    zcr, upr[14], str, raw2;
     integer lrp1;
     doublereal rfn13;
@@ -7045,13 +7045,13 @@ L60:
     integer kmax;
     doublereal azth, tzai, tfnr, rfnu;
     extern /* Subroutine */ int zlog_(doublereal *, doublereal *, doublereal *
-	    , doublereal *, integer *), zdiv_(doublereal *, doublereal *, 
+	    , doublereal *, integer *), zdiv_(doublereal *, doublereal *,
 	    doublereal *, doublereal *, doublereal *, doublereal *);
-    doublereal zthi, test, tzar, zthr, rfnu2, zetai, ptfni, sumai, sumbi, 
+    doublereal zthi, test, tzar, zthr, rfnu2, zetai, ptfni, sumai, sumbi,
 	    zetar, ptfnr, razth, sumar, sumbr, rzthi;
     extern doublereal d1mach_(integer *);
     doublereal rzthr, rtzti;
-    extern /* Subroutine */ int zsqrt_(doublereal *, doublereal *, doublereal 
+    extern /* Subroutine */ int zsqrt_(doublereal *, doublereal *, doublereal
 	    *, doublereal *);
     doublereal rtztr, przthi, przthr;
 
@@ -7100,7 +7100,7 @@ L60:
     if (fabs(*zr) > ac || fabs(*zi) > ac) {
 	goto L15;
     }
-    *zeta1r = (d__1 = log(test), abs(d__1)) * 2. + *fnu;
+    *zeta1r = (d__1 = log(test), fabs(d__1)) * 2. + *fnu;
     *zeta1i = 0.;
     *zeta2r = *fnu;
     *zeta2i = 0.;
@@ -7408,9 +7408,9 @@ L140:
 	i__1 = lr;
 	for (jr = 1; jr <= i__1; ++jr) {
 	    --ju;
-	    sumar = sumar + crr[jr - 1] * upr[ju - 1] - cri[jr - 1] * upi[ju 
+	    sumar = sumar + crr[jr - 1] * upr[ju - 1] - cri[jr - 1] * upi[ju
 		    - 1];
-	    sumai = sumai + crr[jr - 1] * upi[ju - 1] + cri[jr - 1] * upr[ju 
+	    sumai = sumai + crr[jr - 1] * upi[ju - 1] + cri[jr - 1] * upr[ju
 		    - 1];
 /* L170: */
 	}
@@ -7431,9 +7431,9 @@ L180:
 	i__1 = lr;
 	for (jr = 1; jr <= i__1; ++jr) {
 	    --ju;
-	    sumbr = sumbr + drr[jr - 1] * upr[ju - 1] - dri[jr - 1] * upi[ju 
+	    sumbr = sumbr + drr[jr - 1] * upr[ju - 1] - dri[jr - 1] * upi[ju
 		    - 1];
-	    sumbi = sumbi + drr[jr - 1] * upi[ju - 1] + dri[jr - 1] * upr[ju 
+	    sumbi = sumbi + drr[jr - 1] * upi[ju - 1] + dri[jr - 1] * upr[ju
 		    - 1];
 /* L190: */
 	}
@@ -7458,7 +7458,7 @@ L220:
     goto L120;
 } /* zunhj_ */
 
-/* Subroutine */ int zunk1_(doublereal *zr, doublereal *zi, doublereal *fnu, 
+/* Subroutine */ int zunk1_(doublereal *zr, doublereal *zi, doublereal *fnu,
 	integer *kode, integer *mr, integer *n, doublereal *yr, doublereal *
 	yi, integer *nz, doublereal *tol, doublereal *elim, doublereal *alim)
 {
@@ -7480,7 +7480,7 @@ L220:
     integer i__, j, k, m, ib, ic;
     doublereal fn;
     integer il, kk, nw;
-    doublereal c1i, c2i, c2m, c1r, c2r, s1i, s2i, rs1, s1r, s2r, ang, asc, 
+    doublereal c1i, c2i, c2m, c1r, c2r, s1i, s2i, rs1, s1r, s2r, ang, asc,
 	    cki, fnf;
     integer ifn;
     doublereal ckr;
@@ -7493,8 +7493,8 @@ L220:
     doublereal phir[2];
     integer init[2];
     doublereal csrr[3], cssr[3], rast, sumi[2], razr;
-    extern /* Subroutine */ int zs1s2_(doublereal *, doublereal *, doublereal 
-	    *, doublereal *, doublereal *, doublereal *, integer *, 
+    extern /* Subroutine */ int zs1s2_(doublereal *, doublereal *, doublereal
+	    *, doublereal *, doublereal *, doublereal *, integer *,
 	    doublereal *, doublereal *, integer *);
     doublereal sumr[2];
     integer iflag, kflag;
@@ -7505,16 +7505,16 @@ L220:
     doublereal csgni, phidr;
     integer initd;
     doublereal cspni, cwrki[48]	/* was [16][3] */, sumdi;
-    extern /* Subroutine */ int zuchk_(doublereal *, doublereal *, integer *, 
+    extern /* Subroutine */ int zuchk_(doublereal *, doublereal *, integer *,
 	    doublereal *, doublereal *);
     doublereal cspnr, cwrkr[48]	/* was [16][3] */, sumdr;
     extern doublereal d1mach_(integer *);
-    extern /* Subroutine */ int zunik_(doublereal *, doublereal *, doublereal 
-	    *, integer *, integer *, doublereal *, integer *, doublereal *, 
-	    doublereal *, doublereal *, doublereal *, doublereal *, 
-	    doublereal *, doublereal *, doublereal *, doublereal *, 
+    extern /* Subroutine */ int zunik_(doublereal *, doublereal *, doublereal
+	    *, integer *, integer *, doublereal *, integer *, doublereal *,
+	    doublereal *, doublereal *, doublereal *, doublereal *,
+	    doublereal *, doublereal *, doublereal *, doublereal *,
 	    doublereal *);
-    doublereal zeta1i[2], zeta2i[2], zet1di, zet2di, zeta1r[2], zeta2r[2], 
+    doublereal zeta1i[2], zeta2i[2], zet1di, zet2di, zeta1r[2], zeta2r[2],
 	    zet1dr, zet2dr;
 
 /* ***BEGIN PROLOGUE  ZUNK1 */
@@ -7572,7 +7572,7 @@ L10:
 	init[j - 1] = 0;
 	zunik_(&zrr, &zri, &fn, &c__2, &c__0, tol, &init[j - 1], &phir[j - 1],
 		 &phii[j - 1], &zeta1r[j - 1], &zeta1i[j - 1], &zeta2r[j - 1],
-		 &zeta2i[j - 1], &sumr[j - 1], &sumi[j - 1], &cwrkr[(j << 4) 
+		 &zeta2i[j - 1], &sumr[j - 1], &sumi[j - 1], &cwrkr[(j << 4)
 		- 16], &cwrki[(j << 4) - 16]);
 	if (*kode == 1) {
 	    goto L20;
@@ -7870,7 +7870,7 @@ L175:
 	initd = 0;
 L180:
 	zunik_(&zrr, &zri, &fn, &c__1, &c__0, tol, &initd, &phidr, &phidi, &
-		zet1dr, &zet1di, &zet2dr, &zet2di, &sumdr, &sumdi, &cwrkr[(m 
+		zet1dr, &zet1di, &zet2dr, &zet2di, &sumdr, &sumdi, &cwrkr[(m
 		<< 4) - 16], &cwrki[(m << 4) - 16]);
 	if (*kode == 1) {
 	    goto L200;
@@ -8058,7 +8058,7 @@ L300:
     return 0;
 } /* zunk1_ */
 
-/* Subroutine */ int zunk2_(doublereal *zr, doublereal *zi, doublereal *fnu, 
+/* Subroutine */ int zunk2_(doublereal *zr, doublereal *zi, doublereal *fnu,
 	integer *kode, integer *mr, integer *n, doublereal *yr, doublereal *
 	yi, integer *nz, doublereal *tol, doublereal *elim, doublereal *alim)
 {
@@ -8097,15 +8097,15 @@ L300:
     integer iuf;
     doublereal cyi[2], fmr, sar, csr, sgn, zbi;
     integer inu;
-    doublereal bry[3], cyr[2], pti, sti, zbr, zni, rzi, ptr, zri, str, znr, 
+    doublereal bry[3], cyr[2], pti, sti, zbr, zni, rzi, ptr, zri, str, znr,
 	    rzr, zrr, daii, aarg;
     integer ndai;
     doublereal dair, aphi, argi[2], cscl, phii[2], crsc, argr[2];
     integer idum;
     extern doublereal zabs_(doublereal *, doublereal *);
     doublereal phir[2], csrr[3], cssr[3], rast, razr;
-    extern /* Subroutine */ int zs1s2_(doublereal *, doublereal *, doublereal 
-	    *, doublereal *, doublereal *, doublereal *, integer *, 
+    extern /* Subroutine */ int zs1s2_(doublereal *, doublereal *, doublereal
+	    *, doublereal *, doublereal *, doublereal *, integer *,
 	    doublereal *, doublereal *, integer *);
     integer iflag, kflag;
     doublereal argdi, ascle;
@@ -8113,18 +8113,18 @@ L300:
     doublereal phidi, argdr;
     integer ipard;
     doublereal csgni, phidr, cspni, asumi[2], bsumi[2];
-    extern /* Subroutine */ int zuchk_(doublereal *, doublereal *, integer *, 
+    extern /* Subroutine */ int zuchk_(doublereal *, doublereal *, integer *,
 	    doublereal *, doublereal *);
     doublereal cspnr, asumr[2], bsumr[2];
     extern doublereal d1mach_(integer *);
-    extern /* Subroutine */ int zunhj_(doublereal *, doublereal *, doublereal 
-	    *, integer *, doublereal *, doublereal *, doublereal *, 
-	    doublereal *, doublereal *, doublereal *, doublereal *, 
-	    doublereal *, doublereal *, doublereal *, doublereal *, 
-	    doublereal *, doublereal *), zairy_(doublereal *, doublereal *, 
-	    integer *, integer *, doublereal *, doublereal *, integer *, 
+    extern /* Subroutine */ int zunhj_(doublereal *, doublereal *, doublereal
+	    *, integer *, doublereal *, doublereal *, doublereal *,
+	    doublereal *, doublereal *, doublereal *, doublereal *,
+	    doublereal *, doublereal *, doublereal *, doublereal *,
+	    doublereal *, doublereal *), zairy_(doublereal *, doublereal *,
+	    integer *, integer *, doublereal *, doublereal *, integer *,
 	    integer *);
-    doublereal zeta1i[2], zeta2i[2], zet1di, zet2di, zeta1r[2], zeta2r[2], 
+    doublereal zeta1i[2], zeta2i[2], zet1di, zet2di, zeta1r[2], zeta2r[2],
 	    zet1dr, zet2dr, asumdi, bsumdi, asumdr, bsumdr;
 
 /* ***BEGIN PROLOGUE  ZUNK2 */
@@ -8545,7 +8545,7 @@ L175:
 	    goto L172;
 	}
 	zunhj_(&znr, &zni, &fn, &c__0, tol, &phidr, &phidi, &argdr, &argdi, &
-		zet1dr, &zet1di, &zet2dr, &zet2di, &asumdr, &asumdi, &bsumdr, 
+		zet1dr, &zet1di, &zet2dr, &zet2di, &asumdr, &asumdi, &bsumdr,
 		&bsumdi);
 L210:
 	if (*kode == 1) {
@@ -8723,7 +8723,7 @@ L300:
 	if (iflag >= 3) {
 	    goto L310;
 	}
-        // HR 20131223 
+        // HR 20131223
 	c2r = fabs(ckr);
 	c2i = fabs(cki);
 	c2m = MAX(c2r,c2i);
@@ -8750,9 +8750,9 @@ L320:
     return 0;
 } /* zunk2_ */
 
-/* Subroutine */ int zbuni_(doublereal *zr, doublereal *zi, doublereal *fnu, 
+/* Subroutine */ int zbuni_(doublereal *zr, doublereal *zi, doublereal *fnu,
 	integer *kode, integer *n, doublereal *yr, doublereal *yi, integer *
-	nz, integer *nui, integer *nlast, doublereal *fnul, doublereal *tol, 
+	nz, integer *nui, integer *nlast, doublereal *fnul, doublereal *tol,
 	doublereal *elim, doublereal *alim)
 {
     /* System generated locals */
@@ -8762,15 +8762,15 @@ L320:
     integer i__, k;
     doublereal ax, ay;
     integer nl, nw;
-    doublereal c1i, c1m, c1r, s1i, s2i, s1r, s2r, cyi[2], gnu, raz, cyr[2], 
+    doublereal c1i, c1m, c1r, s1i, s2i, s1r, s2r, cyi[2], gnu, raz, cyr[2],
 	    sti, bry[3], rzi, str, rzr, dfnu;
     extern doublereal zabs_(doublereal *, doublereal *);
     doublereal fnui;
-    extern /* Subroutine */ int zuni1_(doublereal *, doublereal *, doublereal 
-	    *, integer *, integer *, doublereal *, doublereal *, integer *, 
+    extern /* Subroutine */ int zuni1_(doublereal *, doublereal *, doublereal
+	    *, integer *, integer *, doublereal *, doublereal *, integer *,
 	    integer *, doublereal *, doublereal *, doublereal *, doublereal *)
-	    , zuni2_(doublereal *, doublereal *, doublereal *, integer *, 
-	    integer *, doublereal *, doublereal *, integer *, integer *, 
+	    , zuni2_(doublereal *, doublereal *, doublereal *, integer *,
+	    integer *, doublereal *, doublereal *, integer *, integer *,
 	    doublereal *, doublereal *, doublereal *, doublereal *);
     integer iflag;
     doublereal ascle, csclr, cscrr;
@@ -8815,7 +8815,7 @@ L320:
 /*     ASYMPTOTIC EXPANSION FOR I(FNU,Z) FOR LARGE FNU APPLIED IN */
 /*     -PI/3.LE.ARG(Z).LE.PI/3 */
 /* ----------------------------------------------------------------------- */
-    zuni1_(zr, zi, &gnu, kode, &c__2, cyr, cyi, &nw, nlast, fnul, tol, elim, 
+    zuni1_(zr, zi, &gnu, kode, &c__2, cyr, cyi, &nw, nlast, fnul, tol, elim,
 	    alim);
     goto L20;
 L10:
@@ -8824,7 +8824,7 @@ L10:
 /*     APPLIED IN PI/3.LT.ABS(ARG(Z)).LE.PI/2 WHERE M=+I OR -I */
 /*     AND HPI=PI/2 */
 /* ----------------------------------------------------------------------- */
-    zuni2_(zr, zi, &gnu, kode, &c__2, cyr, cyi, &nw, nlast, fnul, tol, elim, 
+    zuni2_(zr, zi, &gnu, kode, &c__2, cyr, cyi, &nw, nlast, fnul, tol, elim,
 	    alim);
 L20:
     if (nw < 0) {
@@ -8966,7 +8966,7 @@ L60:
 /*     ASYMPTOTIC EXPANSION FOR I(FNU,Z) FOR LARGE FNU APPLIED IN */
 /*     -PI/3.LE.ARG(Z).LE.PI/3 */
 /* ----------------------------------------------------------------------- */
-    zuni1_(zr, zi, fnu, kode, n, &yr[1], &yi[1], &nw, nlast, fnul, tol, elim, 
+    zuni1_(zr, zi, fnu, kode, n, &yr[1], &yi[1], &nw, nlast, fnul, tol, elim,
 	    alim);
     goto L80;
 L70:
@@ -8975,7 +8975,7 @@ L70:
 /*     APPLIED IN PI/3.LT.ABS(ARG(Z)).LE.PI/2 WHERE M=+I OR -I */
 /*     AND HPI=PI/2 */
 /* ----------------------------------------------------------------------- */
-    zuni2_(zr, zi, fnu, kode, n, &yr[1], &yi[1], &nw, nlast, fnul, tol, elim, 
+    zuni2_(zr, zi, fnu, kode, n, &yr[1], &yi[1], &nw, nlast, fnul, tol, elim,
 	    alim);
 L80:
     if (nw < 0) {
@@ -8988,7 +8988,7 @@ L90:
     return 0;
 } /* zbuni_ */
 
-/* Subroutine */ int zuni1_(doublereal *zr, doublereal *zi, doublereal *fnu, 
+/* Subroutine */ int zuni1_(doublereal *zr, doublereal *zi, doublereal *fnu,
 	integer *kode, integer *n, doublereal *yr, doublereal *yi, integer *
 	nz, integer *nlast, doublereal *fnul, doublereal *tol, doublereal *
 	elim, doublereal *alim)
@@ -9018,16 +9018,16 @@ L90:
     doublereal csrr[3], cssr[3], rast, sumi, sumr;
     integer iflag;
     doublereal ascle, cwrki[16];
-    extern /* Subroutine */ int zuchk_(doublereal *, doublereal *, integer *, 
+    extern /* Subroutine */ int zuchk_(doublereal *, doublereal *, integer *,
 	    doublereal *, doublereal *);
     doublereal cwrkr[16];
     extern doublereal d1mach_(integer *);
-    extern /* Subroutine */ int zunik_(doublereal *, doublereal *, doublereal 
-	    *, integer *, integer *, doublereal *, integer *, doublereal *, 
-	    doublereal *, doublereal *, doublereal *, doublereal *, 
-	    doublereal *, doublereal *, doublereal *, doublereal *, 
-	    doublereal *), zuoik_(doublereal *, doublereal *, doublereal *, 
-	    integer *, integer *, integer *, doublereal *, doublereal *, 
+    extern /* Subroutine */ int zunik_(doublereal *, doublereal *, doublereal
+	    *, integer *, integer *, doublereal *, integer *, doublereal *,
+	    doublereal *, doublereal *, doublereal *, doublereal *,
+	    doublereal *, doublereal *, doublereal *, doublereal *,
+	    doublereal *), zuoik_(doublereal *, doublereal *, doublereal *,
+	    integer *, integer *, integer *, doublereal *, doublereal *,
 	    integer *, doublereal *, doublereal *, doublereal *);
     doublereal zeta1i, zeta2i, zeta1r, zeta2r;
 
@@ -9256,7 +9256,7 @@ L110:
     if (nd == 0) {
 	goto L100;
     }
-    zuoik_(zr, zi, fnu, kode, &c__1, &nd, &yr[1], &yi[1], &nuf, tol, elim, 
+    zuoik_(zr, zi, fnu, kode, &c__1, &nd, &yr[1], &yi[1], &nuf, tol, elim,
 	    alim);
     if (nuf < 0) {
 	goto L120;
@@ -9289,7 +9289,7 @@ L130:
     return 0;
 } /* zuni1_ */
 
-/* Subroutine */ int zuni2_(doublereal *zr, doublereal *zi, doublereal *fnu, 
+/* Subroutine */ int zuni2_(doublereal *zr, doublereal *zi, doublereal *fnu,
 	integer *kode, integer *n, doublereal *yr, doublereal *yi, integer *
 	nz, integer *nlast, doublereal *fnul, doublereal *tol, doublereal *
 	elim, doublereal *alim)
@@ -9318,7 +9318,7 @@ L130:
     integer nai;
     doublereal air, zbi, cyi[2], sar;
     integer nuf, inu;
-    doublereal bry[3], raz, sti, zbr, zni, cyr[2], rzi, str, znr, rzr, daii, 
+    doublereal bry[3], raz, sti, zbr, zni, cyr[2], rzi, str, znr, rzr, daii,
 	    cidi, aarg;
     integer ndai;
     doublereal dair, aphi, argi, cscl, phii, crsc, argr;
@@ -9327,18 +9327,18 @@ L130:
     doublereal phir, csrr[3], cssr[3], rast;
     integer iflag;
     doublereal ascle, asumi, bsumi;
-    extern /* Subroutine */ int zuchk_(doublereal *, doublereal *, integer *, 
+    extern /* Subroutine */ int zuchk_(doublereal *, doublereal *, integer *,
 	    doublereal *, doublereal *);
     doublereal asumr, bsumr;
     extern doublereal d1mach_(integer *);
-    extern /* Subroutine */ int zunhj_(doublereal *, doublereal *, doublereal 
-	    *, integer *, doublereal *, doublereal *, doublereal *, 
-	    doublereal *, doublereal *, doublereal *, doublereal *, 
-	    doublereal *, doublereal *, doublereal *, doublereal *, 
-	    doublereal *, doublereal *), zairy_(doublereal *, doublereal *, 
-	    integer *, integer *, doublereal *, doublereal *, integer *, 
-	    integer *), zuoik_(doublereal *, doublereal *, doublereal *, 
-	    integer *, integer *, integer *, doublereal *, doublereal *, 
+    extern /* Subroutine */ int zunhj_(doublereal *, doublereal *, doublereal
+	    *, integer *, doublereal *, doublereal *, doublereal *,
+	    doublereal *, doublereal *, doublereal *, doublereal *,
+	    doublereal *, doublereal *, doublereal *, doublereal *,
+	    doublereal *, doublereal *), zairy_(doublereal *, doublereal *,
+	    integer *, integer *, doublereal *, doublereal *, integer *,
+	    integer *), zuoik_(doublereal *, doublereal *, doublereal *,
+	    integer *, integer *, integer *, doublereal *, doublereal *,
 	    integer *, doublereal *, doublereal *, doublereal *);
     doublereal zeta1i, zeta2i, zeta1r, zeta2r;
 
@@ -9464,7 +9464,7 @@ L60:
 /*     TEST FOR UNDERFLOW AND OVERFLOW */
 /* ----------------------------------------------------------------------- */
 	rs1 = s1r;
-	if (abs(rs1) > *elim) {
+	if (fabs(rs1) > *elim) {
 	    goto L120;
 	}
 	if (i__ == 1) {
@@ -9611,7 +9611,7 @@ L120:
     if (nd == 0) {
 	goto L110;
     }
-    zuoik_(zr, zi, fnu, kode, &c__1, &nd, &yr[1], &yi[1], &nuf, tol, elim, 
+    zuoik_(zr, zi, fnu, kode, &c__1, &nd, &yr[1], &yi[1], &nuf, tol, elim,
 	    alim);
     if (nuf < 0) {
 	goto L140;
@@ -9664,7 +9664,7 @@ L150:
 
 #if 0
 #HR20140127
-/* Subroutine */ int xerror_(char *mess, integer *nmess, integer *l1, integer 
+/* Subroutine */ int xerror_(char *mess, integer *nmess, integer *l1, integer
 	*l2, ftnlen mess_len)
 {
     /* Format strings */
