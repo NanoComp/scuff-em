@@ -15,11 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- * 
+ *
  */
 
 /*
- * machcon.c -- f2c translation of MACHCON.F fortran code file 
+ * machcon.c -- f2c translation of MACHCON.F fortran code file
  * from Donald Amos' implementation of bessel functions and other
  * special functions found in the public-domain SLATEC package
  */
@@ -33,6 +33,7 @@ typedef int logical;
 typedef int ftnlen;
 
 #include <stdio.h>
+#include <stdlib.h>
 
 /* Table of constant values */
 
@@ -52,7 +53,7 @@ integer i1mach_(integer *i__)
 
     static struct {
 	integer e_1[16];
-	} equiv_0 = { 5, 6, 0, 0, 32, 4, 2, 31, 2147483647, 2, 24, -125, 127, 
+	} equiv_0 = { 5, 6, 0, 0, 32, 4, 2, 31, 2147483647, 2, 24, -125, 127,
 		53, -1021, 1023 };
 
 
@@ -66,7 +67,7 @@ integer i1mach_(integer *i__)
     /* Builtin functions */
 #if 0
     integer s_wsfe(cilist *), e_wsfe(void);
-#endif 
+#endif
     /* Subroutine */ int s_stop(const char *, ftnlen);
 
     /* Local variables */
@@ -765,7 +766,7 @@ doublereal r1mach_(integer *i__)
 #define diver ((integer *)&equiv_4 + 3)
 #define right ((integer *)&equiv_4 + 2)
 #if 0
-    extern /* Subroutine */ int xerror_(char *, integer *, integer *, integer 
+    extern /* Subroutine */ int xerror_(char *, integer *, integer *, integer
 	    *, ftnlen);
 #endif
 
@@ -1116,8 +1117,8 @@ doublereal d1mach_(integer *i__)
 	integer e_1[10];
 	doublereal fill_2[1];
 	doublereal e_3;
-	} equiv_4 = { 2002288515, 1050897, 1487780761, 2146426097, 
-		-1209488034, 1017118298, -1209488034, 1018166874, 1352628735, 
+	} equiv_4 = { 2002288515, 1050897, 1487780761, 2146426097,
+		-1209488034, 1017118298, -1209488034, 1018166874, 1352628735,
 		1070810131, {0}, 0. };
 
 
@@ -1132,7 +1133,7 @@ doublereal d1mach_(integer *i__)
 #define diver ((integer *)&equiv_4 + 6)
 #define right ((integer *)&equiv_4 + 4)
 #if 0
-    extern /* Subroutine */ int xerror_(char *, integer *, integer *, integer 
+    extern /* Subroutine */ int xerror_(char *, integer *, integer *, integer
 	    *, ftnlen);
 #endif
 
@@ -1579,4 +1580,3 @@ doublereal d1mach_(integer *i__)
 /* ***FIRST EXECUTABLE STATEMENT  FDUMP */
     return 0;
 } /* fdump_ */
-
