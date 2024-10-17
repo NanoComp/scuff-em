@@ -18,9 +18,9 @@
  */
 
 /*
- * LBWrappers.cc  -- HMatrix class methods that amount to calls to 
- *                -- LAPACK / BLAS routines, possibly with some pre- or 
- *                -- post-processing 
+ * LBWrappers.cc  -- HMatrix class methods that amount to calls to
+ *                -- LAPACK / BLAS routines, possibly with some pre- or
+ *                -- post-processing
  *
  * homer reid     -- 12/2009 -- 9/2012
  */
@@ -33,7 +33,7 @@
 #include <libhrutil.h>
 
 extern "C" {
- #include "lapack.h" 
+ #include "lapack.h"
 }
 
 #include "libhmat.h"
@@ -62,9 +62,9 @@ void HMatrix::Multiply(HMatrix *B, HMatrix *C, const char *Options)
   if ( RealComplex!=B->RealComplex || RealComplex!=C->RealComplex)
    ErrExit("%s:%i: data type mismatch",__FILE__,__LINE__);
 
-  /***************************************************************/ 
-  /* parse Options string ****************************************/ 
-  /***************************************************************/ 
+  /***************************************************************/
+  /* parse Options string ****************************************/
+  /***************************************************************/
   char TransA[2]="N", TransB[2]="N";
   if (Options)
    { int MaxTokens=4, NumTokens;
@@ -73,28 +73,28 @@ void HMatrix::Multiply(HMatrix *B, HMatrix *C, const char *Options)
      strncpy(Line, Options, 100);
      NumTokens=Tokenize(Line, Tokens, MaxTokens);
      for (int nt=0; nt<NumTokens; nt++)
-      { if (!strcasecmp(Tokens[nt],"--transa"))    
-         { if ( (nt+1) >= NumTokens ) 
+      { if (!strcasecmp(Tokens[nt],"--transa"))
+         { if ( (nt+1) >= NumTokens )
             ErrExit("invalid options string in HMatrix::Multiply");
            strncpy(TransA,Tokens[nt+1],1);
            nt++;
          }
-        else if (!strcasecmp(Tokens[nt],"--transb"))    
-         { if ( (nt+1) >= NumTokens ) 
+        else if (!strcasecmp(Tokens[nt],"--transb"))
+         { if ( (nt+1) >= NumTokens )
             ErrExit("invalid options string in HMatrix::Multiply");
            strncpy(TransB,Tokens[nt+1],1);
            nt++;
          }
-        else 
+        else
          ErrExit("invalid options string in HMatrix::Multiply");
       };
    };
 
-  /***************************************************************/ 
-  /* sanity check on matrix sizes: if operand dimensions are     */ 
+  /***************************************************************/
+  /* sanity check on matrix sizes: if operand dimensions are     */
   /* (NRAxNCA), (NRBxNCB), (NRCxNCC), then we must have          */
   /* NCA=NRB, NRA=NRC, NCB=NCC.                                  */
-  /***************************************************************/ 
+  /***************************************************************/
   int NRA = (toupper(TransA[0])=='N') ? NR : NC;
   int NCA = (toupper(TransA[0])=='N') ? NC : NR;
   int NRB = (toupper(TransB[0])=='N') ? B->NR : B->NC;
@@ -104,9 +104,9 @@ void HMatrix::Multiply(HMatrix *B, HMatrix *C, const char *Options)
   if ( (NCA!=NRB) || (NRA!=NRC) || (NCB!=NCC) )
    ErrExit("%s:%i: dimension mismatch",__FILE__,__LINE__);
 
-  /***************************************************************/ 
-  /***************************************************************/ 
-  /***************************************************************/ 
+  /***************************************************************/
+  /***************************************************************/
+  /***************************************************************/
   if ( RealComplex==LHM_REAL && StorageType==LHM_NORMAL )
    dgemm_(TransA,TransB,&NRC,&NCC,&NCA,&dOne,DM,&NR,B->DM,&(B->NR),&dZero,C->DM,&(C->NR));
   else if ( RealComplex==LHM_COMPLEX && StorageType==LHM_NORMAL )
@@ -137,7 +137,7 @@ void HMatrix::GetMatrixProductDiagonal(HMatrix *B, HVector *DAB)
   int BStride=1;
 
   if ( RealComplex==LHM_REAL )
-   for(n=0; n<DAB->N; n++) 
+   for(n=0; n<DAB->N; n++)
     DAB->SetEntry( n, ddot_( &Length, DM + n, &AStride, B->DM + n*Length, &BStride) );
   else
    for(n=0; n<DAB->N; n++)
@@ -149,21 +149,21 @@ void HMatrix::GetMatrixProductDiagonal(HMatrix *B, HVector *DAB)
 /* replace the matrix with its LU factorization ****************/
 /***************************************************************/
 int HMatrix::LUFactorize()
-{ 
+{
   int info;
 
   if (ipiv==0)
    ipiv=(int *)mallocEC(NR*sizeof(int));
 
   if ( RealComplex==LHM_REAL && StorageType==LHM_NORMAL )
-   dgetrf_(&NR, &NC, DM, &NR, ipiv, &info); 
+   dgetrf_(&NR, &NC, DM, &NR, ipiv, &info);
   else if ( RealComplex==LHM_REAL && StorageType==LHM_SYMMETRIC )
    dsptrf_("U", &NR, DM, ipiv, &info);
   else if ( RealComplex==LHM_COMPLEX && StorageType==LHM_NORMAL )
    zgetrf_(&NR, &NC, ZM, &NR, ipiv, &info);
   else if ( RealComplex==LHM_COMPLEX && StorageType==LHM_HERMITIAN )
    zhptrf_("U", &NR, ZM, ipiv, &info);
-  else if ( RealComplex==LHM_COMPLEX && StorageType==LHM_SYMMETRIC ) 
+  else if ( RealComplex==LHM_COMPLEX && StorageType==LHM_SYMMETRIC )
    zsptrf_("U", &NR, ZM, ipiv, &info);
 
   return info;
@@ -173,7 +173,7 @@ int HMatrix::LUFactorize()
 /* solve linear system using LU factorization ******************/
 /***************************************************************/
 int HMatrix::LUSolve(HVector *X)
-{ 
+{
   int info;
   int iOne=1;
 
@@ -182,7 +182,7 @@ int HMatrix::LUSolve(HVector *X)
   if ( NR!=NC || NR!=X->N )
    ErrExit("dimension mismatch in LUSolve");
 
-  if (ipiv==0)  
+  if (ipiv==0)
    ErrExit("LUFactorize() must be called before LUSolve()");
 
   if ( RealComplex==LHM_REAL && StorageType==LHM_NORMAL )
@@ -206,7 +206,7 @@ int HMatrix::LUSolve(HVector *X)
 /* transpose, or conjugate transpose.                         */
 /***************************************************************/
 int HMatrix::LUSolve(HMatrix *X, char Trans, int nrhs)
-{ 
+{
   int info;
 
   if ( RealComplex != X->RealComplex )
@@ -215,7 +215,7 @@ int HMatrix::LUSolve(HMatrix *X, char Trans, int nrhs)
    ErrExit("dimension mismatch in LUSolve");
   if ( nrhs > X->NC )
    ErrExit("too many RHSs requested in LUSolve");
-  if (ipiv==0)  
+  if (ipiv==0)
    ErrExit("LUFactorize() must be called before LUSolve()");
   if ( Trans!='N' && StorageType!=LHM_NORMAL )
    ErrExit("transposed LU-solves not available for packed matrices");
@@ -235,13 +235,13 @@ if ( RealComplex==LHM_REAL && StorageType==LHM_NORMAL )
 
 /* entry points with one or more parameters set to default */
 
-int HMatrix::LUSolve(HMatrix *X, char Trans) 
+int HMatrix::LUSolve(HMatrix *X, char Trans)
  { return LUSolve(X,Trans,X->NC); }
 
-int HMatrix::LUSolve(HMatrix *X, int nrhs) 
+int HMatrix::LUSolve(HMatrix *X, int nrhs)
  { return LUSolve(X,'N',nrhs); }
 
-int HMatrix::LUSolve(HMatrix *X) 
+int HMatrix::LUSolve(HMatrix *X)
  { return LUSolve(X,'N',X->NC); }
 
 /***************************************************************/
@@ -249,7 +249,7 @@ int HMatrix::LUSolve(HMatrix *X)
 /* has already been called                                     */
 /***************************************************************/
 int HMatrix::LUInvert()
-{ 
+{
   int info;
   double *dwork;
   cdouble *zwork;
@@ -260,7 +260,7 @@ int HMatrix::LUInvert()
   if ( NR!=NC )
    ErrExit("dimension mismatch in LUSolve");
 
-  if (ipiv==0)  
+  if (ipiv==0)
    ErrExit("LUFactorize() must be called before LUInvert()");
 
   int MinusOne=-1;
@@ -280,7 +280,7 @@ int HMatrix::LUInvert()
      dgetri_(&NR, DM, &NR, ipiv, dwork, &lwork, &info);
    }
   else if ( RealComplex==LHM_REAL && StorageType==LHM_SYMMETRIC )
-   { 
+   {
      lworkOptimal = NR;
      if (lworkOptimal > lwork)
       { if (work) free(work);
@@ -290,10 +290,10 @@ int HMatrix::LUInvert()
      dwork=(double *)work;
 
      dsptri_("U", &NR, DM, ipiv, dwork, &info);
- 
+
    }
   else if ( RealComplex==LHM_COMPLEX && StorageType==LHM_NORMAL )
-   { 
+   {
      zgetri_(&NR, ZM, &NR, ipiv, &zlworkOptimal, &MinusOne, &info);
      lworkOptimal=(int) real(zlworkOptimal);
 
@@ -307,7 +307,7 @@ int HMatrix::LUInvert()
      zgetri_(&NR, ZM, &NR, ipiv, zwork, &lwork, &info);
    }
   else if ( RealComplex==LHM_COMPLEX && StorageType==LHM_HERMITIAN )
-   { 
+   {
      lworkOptimal=NR;
      if (lworkOptimal > lwork)
       { if (work) free(work);
@@ -315,11 +315,11 @@ int HMatrix::LUInvert()
         lwork=lworkOptimal;
       };
      zwork=(cdouble *)work;
- 
+
      zhptri_("U", &NR, ZM, ipiv, zwork, &info);
    }
   else if ( RealComplex==LHM_COMPLEX && StorageType==LHM_SYMMETRIC )
-   { 
+   {
      lworkOptimal=NR;
      if (lworkOptimal > lwork)
       { if (work) free(work);
@@ -327,7 +327,7 @@ int HMatrix::LUInvert()
         lwork=lworkOptimal;
       };
      zwork=(cdouble *)work;
- 
+
      zsptri_("U", &NR, ZM, ipiv, zwork, &info);
    };
 
@@ -338,7 +338,7 @@ int HMatrix::LUInvert()
 /* replace the matrix with its cholesky factorization **********/
 /***************************************************************/
 int HMatrix::CholFactorize()
-{ 
+{
   int info;
 
   if ( RealComplex==LHM_REAL && StorageType==LHM_NORMAL )
@@ -361,7 +361,7 @@ int HMatrix::CholFactorize()
 /* solve linear system using cholesky factorization ************/
 /***************************************************************/
 int HMatrix::CholSolve(HVector *X)
-{ 
+{
   int info;
   int iOne=1;
 
@@ -388,7 +388,7 @@ int HMatrix::CholSolve(HVector *X)
 /* solve linear systems using cholesky factorization ***********/
 /***************************************************************/
 int HMatrix::CholSolve(HMatrix *X, int nrhs)
-{ 
+{
   int info;
 
   if ( NR!=NC || NR!=X->NR )
@@ -413,7 +413,7 @@ int HMatrix::CholSolve(HMatrix *X, int nrhs)
 }
 
 int HMatrix::CholSolve(HMatrix *X) { return CholSolve(X,X->NC); }
- 
+
 /***************************************************************/
 /* QR-factorization in which 'this' is replaced by its own     */
 /* QR-factorization. If *pQ and *pR are NULL on entry, or if   */
@@ -426,8 +426,8 @@ int HMatrix::QR(HMatrix **pQ, HMatrix **pR)
   if (pQ==0 || pR==0)
    ErrExit("HMatrix::QR called with null pointers");
 
-  HMatrix *Q = *pQ; 
-  HMatrix *R = *pR; 
+  HMatrix *Q = *pQ;
+  HMatrix *R = *pR;
 
   // make sure Q and R are the right sizes, namely Q is NRxNR and R is NRxNC
   if ( Q==0 || Q->NR!=NR || Q->NC!=NR )
@@ -456,7 +456,7 @@ int HMatrix::QR(HMatrix **pQ, HMatrix **pR)
   int info, MinusOne=-1;
   int TauLength = NR<NC ? NR:NC;
   if ( RealComplex==LHM_REAL )
-   { 
+   {
      double *Tau=R->DM, *dwork;
      double dlworkOptimal;
      int lworkOptimal;
@@ -475,7 +475,7 @@ int HMatrix::QR(HMatrix **pQ, HMatrix **pR)
      Tau   = (double *)work;
      dwork = Tau + TauLength;
 
-     // do the QR factorization 
+     // do the QR factorization
      dgeqrf_(&NR, &NC, R->DM, &NR, Tau, dwork, &lworkOptimal, &info);
 
      // reconstruct the Q matrix from the Householder reflectors
@@ -484,7 +484,7 @@ int HMatrix::QR(HMatrix **pQ, HMatrix **pR)
 
    }
   else //( RealComplex==LHM_COMPLEX
-   { 
+   {
      cdouble *Tau=R->ZM, *zwork;
      cdouble zlworkOptimal;
      int lworkOptimal;
@@ -504,7 +504,7 @@ int HMatrix::QR(HMatrix **pQ, HMatrix **pR)
      Tau   = (cdouble *)work;
      zwork = Tau + TauLength;
 
-     // do the QR factorization 
+     // do the QR factorization
      zgeqrf_(&NR, &NC, R->ZM, &NR, Tau, zwork, &lworkOptimal, &info);
 
      // reconstruct the Q matrix from the Householder reflectors
@@ -513,7 +513,7 @@ int HMatrix::QR(HMatrix **pQ, HMatrix **pR)
 
    };
 
-  // zero out the lower diagonal of R 
+  // zero out the lower diagonal of R
   for(int nc=0; nc<NC; nc++)
    for(int nr=nc+1; nr<NR; nr++)
     R->SetEntry(nr,nc,0.0);
@@ -558,10 +558,10 @@ HVector *HMatrix::Eig(HVector *Lambda, HMatrix *U)
   int idum1, idum2, idum3, lworkOptimal, liworkOptimal, info, MinusOne=-1;
   double ddum1, ddum2, AbsTol=0.0, dlworkOptimal;
 
-  int *isuppz = new int[2*NR]; 
- 
+  int *isuppz = new int[2*NR];
+
   if ( RealComplex==LHM_REAL && StorageType==LHM_NORMAL )
-   { 
+   {
      /*--------------------------------------------------------------*/
      /*- query optimal workspace sizes and (re)allocate internally-  */
      /*- stored workspaces as necessary                              */
@@ -678,7 +678,7 @@ HVector *HMatrix::NSEig(HVector *Lambda, HMatrix *U)
   int lworkOptimal, info, MinusOne=-1;
 
   if (RealComplex==LHM_REAL)
-   { 
+   {
      /*--------------------------------------------------------------*/
      /*- query optimal workspace sizes and (re)allocate internally-  */
      /*- stored workspaces as necessary                              */
@@ -686,7 +686,7 @@ HVector *HMatrix::NSEig(HVector *Lambda, HMatrix *U)
      double *wr = new double[NR];
      double *wi = new double[NR];
      double dlworkOptimal;
-     dgeev_(jobvl, jobvr, &NR, DM, &NR, wr, wi, 0, &NR, 
+     dgeev_(jobvl, jobvr, &NR, DM, &NR, wr, wi, 0, &NR,
             U ? U->DM : 0, &NR, &dlworkOptimal, &MinusOne, &info);
 
      lworkOptimal = (int)dlworkOptimal;
@@ -698,7 +698,7 @@ HVector *HMatrix::NSEig(HVector *Lambda, HMatrix *U)
      /*--------------------------------------------------------------*/
      /*--------------------------------------------------------------*/
      /*--------------------------------------------------------------*/
-     dgeev_(jobvl, jobvr, &NR, DM, &NR, wr, wi, 0, &NR, 
+     dgeev_(jobvl, jobvr, &NR, DM, &NR, wr, wi, 0, &NR,
             U ? U->DM : 0, &NR, (double *)work, &lwork, &info);
 
      /*--------------------------------------------------------------*/
@@ -718,8 +718,8 @@ HVector *HMatrix::NSEig(HVector *Lambda, HMatrix *U)
      double *rwork = (double *)mallocEC(2*NR*sizeof(double));
 
      cdouble zlworkOptimal;
-     zgeev_(jobvl, jobvr, &NR, ZM, &NR, Lambda->ZV, 0, &NR, 
-            (U ? U->ZM : 0), &NR, 
+     zgeev_(jobvl, jobvr, &NR, ZM, &NR, Lambda->ZV, 0, &NR,
+            (U ? U->ZM : 0), &NR,
             &zlworkOptimal, &MinusOne, rwork, &info);
      lworkOptimal = 2*(int)(ceil(real(zlworkOptimal)));
      cdouble *zwork = (cdouble *)mallocEC(lworkOptimal * sizeof(cdouble));
@@ -768,15 +768,15 @@ HVector *HMatrix::SVD(HVector *Sigma, HMatrix *U, HMatrix *VT)
    };
   if (Sigma==0)
    Sigma=new HVector(NRCMin,LHM_REAL);
-  
+
   char jobu[2]="";
-  if ( U==0 ) 
+  if ( U==0 )
    jobu[0]='N';
-  else if ( U->NR==NR && U->NC==NR     && U->RealComplex==RealComplex) 
+  else if ( U->NR==NR && U->NC==NR     && U->RealComplex==RealComplex)
    jobu[0]='A';
   else if ( U->NR==NR && U->NC==NRCMin && U->RealComplex==RealComplex)
    jobu[0]='S';
-  else 
+  else
    { Warn("Incorrect U matrix passed to SVD (omitting RSV calculation)");
      jobu[0]='N';
      U=0;
@@ -784,13 +784,13 @@ HVector *HMatrix::SVD(HVector *Sigma, HMatrix *U, HMatrix *VT)
   int LDU = U ? U->NR : 0;
 
   char jobvt[2]="";
-  if ( VT==0 ) 
+  if ( VT==0 )
    jobvt[0]='N';
   else if ( VT->NR==NC && VT->NC==NC     && VT->RealComplex==RealComplex)
    jobvt[0]='A';
   else if ( VT->NR==NRCMin && VT->NC==NC && VT->RealComplex==RealComplex)
    jobvt[0]='S';
-  else 
+  else
    { Warn("Incorrect VT matrix passed to SVD (omitting LSV calculation)");
      jobvt[0]='N';
      VT=0;
@@ -802,7 +802,7 @@ HVector *HMatrix::SVD(HVector *Sigma, HMatrix *U, HMatrix *VT)
   /***************************************************************/
   int lworkOptimal, info, MinusOne=-1;
   if (RealComplex==LHM_REAL)
-   { 
+   {
      /*--------------------------------------------------------------*/
      /*- query optimal workspace sizes and (re)allocate internally-  */
      /*- stored workspaces as necessary                              */
@@ -833,8 +833,8 @@ HVector *HMatrix::SVD(HVector *Sigma, HMatrix *U, HMatrix *VT)
      /*--------------------------------------------------------------*/
      double *rwork = new double[5*NRCMin];
      cdouble zlworkOptimal;
-     zgesvd_(jobu, jobvt, &NR, &NC, ZM, &NR, Sigma->DV, 
-             U ? U->ZM : 0, &LDU, VT ? VT->ZM : 0, &LDVT, 
+     zgesvd_(jobu, jobvt, &NR, &NC, ZM, &NR, Sigma->DV,
+             U ? U->ZM : 0, &LDU, VT ? VT->ZM : 0, &LDVT,
              &zlworkOptimal, &MinusOne, rwork, &info);
 
      lworkOptimal = 2*(int)(real(zlworkOptimal));
@@ -846,7 +846,7 @@ HVector *HMatrix::SVD(HVector *Sigma, HMatrix *U, HMatrix *VT)
      /*--------------------------------------------------------------*/
      /*--------------------------------------------------------------*/
      /*--------------------------------------------------------------*/
-     zgesvd_(jobu, jobvt, &NR, &NC, ZM, &NR, Sigma->DV, 
+     zgesvd_(jobu, jobvt, &NR, &NC, ZM, &NR, Sigma->DV,
              U ? U->ZM : 0, &LDU, VT ? VT->ZM : 0, &LDVT,
              (cdouble *)work, &lwork, rwork, &info);
      delete[] rwork;
@@ -858,7 +858,7 @@ HVector *HMatrix::SVD(HVector *Sigma, HMatrix *U, HMatrix *VT)
 }
 
 /***************************************************************/
-/***************************************************************/ 
+/***************************************************************/
 /***************************************************************/
 double HMatrix::GetNorm(bool UseInfinityNorm)
 {
@@ -868,7 +868,7 @@ double HMatrix::GetNorm(bool UseInfinityNorm)
   /***************************************************************/
   /***************************************************************/
   if (RealComplex==LHM_REAL)
-   { 
+   {
      /*--------------------------------------------------------------*/
      /*- (re)allocate internally--stored workspaces as necessary     */
      /*--------------------------------------------------------------*/
@@ -900,7 +900,7 @@ double HMatrix::GetNorm(bool UseInfinityNorm)
 }
 
 /***************************************************************/
-/***************************************************************/ 
+/***************************************************************/
 /***************************************************************/
 double HMatrix::GetRCond(double ANorm, bool UseInfinityNorm)
 {
@@ -911,7 +911,7 @@ double HMatrix::GetRCond(double ANorm, bool UseInfinityNorm)
   /***************************************************************/
   /***************************************************************/
   if (RealComplex==LHM_REAL)
-   { 
+   {
      /*--------------------------------------------------------------*/
      /*- (re)allocate internally--stored workspaces as necessary     */
      /*--------------------------------------------------------------*/
@@ -940,7 +940,7 @@ double HMatrix::GetRCond(double ANorm, bool UseInfinityNorm)
       { work=realloc(work,lworkOptimal*sizeof(double));
         lwork=lworkOptimal;
       };
-  
+
      double *rwork  = (double *)work;
      double *work2  = rwork + 2*NR;
      cdouble *zwork = (cdouble *)work2;
@@ -958,7 +958,7 @@ double HMatrix::GetRCond(double ANorm, bool UseInfinityNorm)
 /***************************************************************/
 cdouble DoDot(HVector *A, HVector *B, bool Hermitian=true)
 {
-  if ( (A->N != A->N) || (A->RealComplex != B->RealComplex) )
+  if ( (A->N != B->N) || (A->RealComplex != B->RealComplex) )
    { Warn("attempt to dot-product incompatible vectors (returning 0)");
      return 0.0;
    };
@@ -968,7 +968,7 @@ cdouble DoDot(HVector *A, HVector *B, bool Hermitian=true)
    return ddot_(&N, A->DV, &IncX, B->DV, &IncY);
   else if (Hermitian)
    return zdotc_(&N, A->ZV, &IncX, B->ZV, &IncY);
-  else 
+  else
    return zdotu_(&N, A->ZV, &IncX, B->ZV, &IncY);
 }
 
@@ -1015,7 +1015,7 @@ void HMatrix::Apply(HVector *X, HVector *Y, char TransChar)
 
   if (RealComplex==LHM_REAL)
    dgemv_(Trans, &NR, &NC, &dOne, DM, &NR, X->DV, &IncX, &dZero, Y->DV, &IncY);
-  else 
+  else
    zgemv_(Trans, &NR, &NC, &zOne, ZM, &NR, X->ZV, &IncX, &zZero, Y->ZV, &IncY);
 
 }
