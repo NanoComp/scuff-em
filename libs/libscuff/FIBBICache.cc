@@ -18,9 +18,9 @@
  */
 
 /*
- * FIBBICache.cc -- caching of (F)requency-(I)ndependent 
+ * FIBBICache.cc -- caching of (F)requency-(I)ndependent
  *               -- (B)asis function -- (B)asis function (I)ntegrals
- * 
+ *
  * homer reid    -- 4/2015
  */
 #include "config.h"
@@ -84,7 +84,7 @@ long JenkinsHash(const char *key, size_t len)
 
 static long HashFunction(const float *Key)
 { return JenkinsHash( (const char *)Key, KEYSIZE );
-} 
+}
 
 /*--------------------------------------------------------------*/
 /*--------------------------------------------------------------*/
@@ -96,14 +96,14 @@ typedef std::pair<KeyStruct, DataStruct> KDPair;
 
 struct FIBBIKeyHash
  {
-   long operator() (const KeyStruct &K) const 
+   long operator() (const KeyStruct &K) const
     { return HashFunction(K.Key); }
  };
 
-typedef struct 
- { 
+typedef struct FIBBIKeyCmp_struct
+ {
    bool operator()(const KeyStruct &K1, const KeyStruct &K2) const
-    { 
+    {
       return !memcmp( (const void *)K1.Key,
                       (const void *)K2.Key,
                       KEYSIZE
@@ -131,7 +131,7 @@ class FIBBICache
 {
 public:
 
-   // class methods 
+   // class methods
    FIBBICache(char *MeshFileName);
    ~FIBBICache();
 
@@ -170,11 +170,11 @@ FIBBICache::FIBBICache(char *MeshFileName)
   LastFileName=0;
   NumRecordsInFile=0;
   if (MeshFileName)
-   { 
+   {
      char CacheFileName[MAXSTR];
      int Status=1;
 
-     // first look for ${SCUFF_CACHE_PATH}/MeshFile.scuffcache 
+     // first look for ${SCUFF_CACHE_PATH}/MeshFile.scuffcache
      char *CacheDir=getenv("SCUFF_CACHE_PATH");
      if (CacheDir)
       { snprintf(CacheFileName, MAXSTR, "%s/%s.%s",
@@ -203,7 +203,7 @@ FIBBICache::~FIBBICache()
   KDMap *KDM = (KDMap *)opTable;
   delete KDM;
 
-} 
+}
 
 /***************************************************************/
 /* simple ordering scheme for pairs of RWG edges               */
@@ -216,9 +216,9 @@ bool ProperlyOrdered(RWGSurface *SA, int neA, RWGSurface *SB, int neB)
 
   RWGEdge *Ea = SA->GetEdgeByIndex(neA);
   RWGEdge *Eb = SB->GetEdgeByIndex(neB);
-  double *X0A = Ea->Centroid; 
+  double *X0A = Ea->Centroid;
   double *X0B = Eb->Centroid;
-  
+
   if ( !EqualFloat(X0A[2], X0B[2]) )
    return (X0A[2] < X0B[2]);
   if ( !EqualFloat(X0A[1], X0B[1]) )
@@ -296,7 +296,7 @@ void FIBBICache::GetFIBBIData(RWGSurface *SA, int neA,
    { Hits++;
      return;
    }
-  
+
   /***************************************************************/
   /* if it was not found, compute a new FIBBI data record and add*/
   /* it to the cache                                             */
@@ -326,7 +326,7 @@ void FIBBICache::GetFIBBIData(RWGSurface *SA, int neA,
 /* the file format is pretty simple (and non-portable w.r.t.   */
 /* endianness):                                                */
 /*  bytes 0--11:   'FIBBI_CACHE' + 0                           */
-/*  next xx bytes:  first record                               */ 
+/*  next xx bytes:  first record                               */
 /*  next xx bytes:  second record                              */
 /*  ...             ...                                        */
 /*                                                             */
@@ -347,7 +347,7 @@ void FIBBICache::Store(const char *MeshFileName)
   strncpy(MFNCopy,MeshFileName,MAXSTR);
 
   char FileName[MAXSTR];
-  
+
   char *s=getenv("SCUFF_CACHE_PATH");
   if (!s)
    snprintf(FileName,MAXSTR,"%s.%s",GetFileBase(MFNCopy),SUFFIX);
@@ -361,7 +361,7 @@ void FIBBICache::Store(const char *MeshFileName)
   /*--------------------------------------------------------------*/
   unsigned int NumRecords = KDM->size();
   if (    NumRecords==NumRecordsInFile
-       && LastFileName 
+       && LastFileName
        && !strcmp(FileName, LastFileName)
      )
    { Log("FC::S FIBBI cache unchanged since last disk operation (skipping cache dump)");
@@ -395,10 +395,10 @@ Log("I checked and: (%i,%i), (%s,%s)",NumRecords,NumRecordsInFile,FileName,(Last
   NumRecordsInFile=0;
   KDMap::iterator it;
   for ( it = KDM->begin(); it != KDM->end(); it++ )
-   { 
+   {
      const float *Key   = it->first.Key;
      double *Data = it->second.Data;
-     if (    (1 != fwrite(Key,  KEYSIZE,  1, f )) 
+     if (    (1 != fwrite(Key,  KEYSIZE,  1, f ))
           || (1 != fwrite(Data, DATASIZE, 1, f ))
         ) break;
      NumRecordsInFile++;
@@ -429,7 +429,7 @@ int FIBBICache::PreLoad(const char *FileName)
 
   KDMap *KDM       = (KDMap *)opTable;
   int RecordSize   = KEYSIZE + DATASIZE;
-  int NumRecords   = 0; 
+  int NumRecords   = 0;
   int RecordsRead  = 0;
   unsigned long M0 = GetMemoryUsage();
 
@@ -444,10 +444,10 @@ int FIBBICache::PreLoad(const char *FileName)
    { ErrMsg="invalid cache file";
      goto fail;
    };
-  
-  // check that the file signature is present and has the right size 
+
+  // check that the file signature is present and has the right size
   FileSize=fileStats.st_size;
-  char FileSignature[FIBBICF_SIGSIZE]; 
+  char FileSignature[FIBBICF_SIGSIZE];
   if ( (FileSize < ((signed int )FIBBICF_SIGSIZE)) )
    { ErrMsg="invalid cache file";
      goto fail;
@@ -478,10 +478,10 @@ int FIBBICache::PreLoad(const char *FileName)
   Log("FC::P Preloading FIBBI records from file %s...",FileName);
   NumRecords = FileSize / RecordSize;
   for(int nr=0; nr<NumRecords; nr++)
-   { 
+   {
      KeyStruct Key;
-     DataStruct Data; 
-     
+     DataStruct Data;
+
      if (    (fread( Key.Key,    KEYSIZE,  1, f) != 1)
           || (fread( Data.Data,  DATASIZE, 1, f) != 1)
         )
@@ -489,7 +489,7 @@ int FIBBICache::PreLoad(const char *FileName)
         fclose(f);
 	return 1;
       };
-  
+
      KDM->insert( KDPair(Key,Data) );
      RecordsRead++;
    };
@@ -523,7 +523,7 @@ int FIBBICache::PreLoad(const char *FileName)
 /*--------------------------------------------------------------*/
 /*--------------------------------------------------------------*/
 int FIBBICache::Size(int *pHits, int *pMisses)
-{ 
+{
   if (pHits) *pHits=Hits;
   if (pMisses) *pMisses=Misses;
   if (opTable==0) return -1;
