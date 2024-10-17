@@ -1,19 +1,19 @@
-/* 
+/*
  * Copyright (C) 1999, 2002, 2003, 2004, 2005, 2006, 2007 Free Software
  * Foundation, Inc.
- * 
+ *
  * This file is part of GNU libmatheval
- * 
+ *
  * GNU libmatheval is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
  * Software Foundation; either version 2, or (at your option) any later
  * version.
- * 
+ *
  * GNU libmatheval is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * program; see the file COPYING. If not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
@@ -38,7 +38,7 @@
 extern int      yyparse();
 
 /* Following variables are needed for parsing (parser is able to
- * communicate with program from which it is used through global variables 
+ * communicate with program from which it is used through global variables
  * only). */
 char           *input_string;	/* String representing function.  */
 Node           *root;		/* Root of tree representation of
@@ -53,19 +53,19 @@ typedef struct {
 	SymbolTable    *symbol_table;	/* Evalutor symbol table.  */
 	char           *string;	/* Evaluator textual representation. */
 	int             count;	/* Number of cevaluator variables. */
-	char          **names;	/* Array of pointers to cevaluator variable 
+	char          **names;	/* Array of pointers to cevaluator variable
 				 * names. */
 } Evaluator;
 
 void           *
 cevaluator_create(char *string)
 {
-	Evaluator      *cevaluator;	/* Evaluator representing function 
+	Evaluator      *cevaluator;	/* Evaluator representing function
 					 * given by string.  */
 	char           *stringn;	/* Copy of string terminated by
 					 * newline character.  */
 
-	/* Copy string representing function and terminate it with newline 
+	/* Copy string representing function and terminate it with newline
 	 * (this is necessary because parser expect newline character to
 	 * terminate its input). */
 	stringn = XMALLOC(char, strlen(string) + 2);
@@ -108,7 +108,7 @@ void
 cevaluator_destroy(void *cevaluator)
 {
 	/* Destroy tree represention of function, symbol table, array of
-	 * pointers to cevaluator variable names, as well as data structure 
+	 * pointers to cevaluator variable names, as well as data structure
 	 * representing cevaluator. */
 	node_destroy(((Evaluator *) cevaluator)->root);
 	symbol_table_destroy(((Evaluator *) cevaluator)->symbol_table);
@@ -162,7 +162,7 @@ cevaluator_evaluate(void *cevaluator, int count, char **names,
 				 * given variable name.  */
 	int             i;	/* Loop counter.  */
 
-	/* Assign values to symbol table records corresponding to variable 
+	/* Assign values to symbol table records corresponding to variable
 	 * names. */
 	for (i = 0; i < count; i++) {
 		record =
@@ -185,7 +185,7 @@ cevaluator_is_real(void *cevaluator, int count, char **names,
 	int             i;	/* Loop counter.  */
 	Node *copy;
 
-	/* Assign values to symbol table records corresponding to variable 
+	/* Assign values to symbol table records corresponding to variable
 	 * names. */
 	for (i = 0; i < count; i++) {
 		record =
@@ -227,7 +227,7 @@ void
 cevaluator_get_variables(void *cevaluator, char ***names, int *count)
 {
 	Record        **records;	/* Array of symbol table records
-					 * containing cevaluator variables. 
+					 * containing cevaluator variables.
 					 */
 	int             i;	/* Loop counter.  */
 
@@ -259,7 +259,7 @@ cevaluator_get_variables(void *cevaluator, char ***names, int *count)
 }
 
 void           *
-cevaluator_derivative(void *cevaluator, char *name)
+cevaluator_derivative(void *cevaluator, const char *name)
 {
 	Evaluator      *derivative;	/* Derivative function cevaluator. */
 

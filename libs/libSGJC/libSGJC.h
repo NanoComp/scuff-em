@@ -49,8 +49,8 @@ typedef int (*integrand) (unsigned ndim, const double *x, void *,
                           unsigned fdim, double *fval);
 
 /* a vector integrand of a vector of npt points: x[i*ndim + j] is the
-  Data->MuMP    = MuMP;  
-  Data->MuMP    = MuMP;  
+  Data->MuMP    = MuMP;
+  Data->MuMP    = MuMP;
    j-th coordinate of the i-th point, and the k-th function evaluation
    for the i-th point is returned in fval[i*fdim + k].  Return 0 on success
    or nonzero to terminate the integration. */
@@ -83,15 +83,15 @@ typedef enum {
    and using the same fixed-degree quadrature in each subdomain, recursively,
    until convergence is achieved. */
 int hcubature(unsigned fdim, integrand f, void *fdata,
-	      unsigned dim, const double *xmin, const double *xmax, 
-	      size_t maxEval, double reqAbsError, double reqRelError, 
+	      unsigned dim, const double *xmin, const double *xmax,
+	      size_t maxEval, double reqAbsError, double reqRelError,
 	      error_norm norm,
 	      double *val, double *err);
 
 /* as hcubature, but vectorized integrand */
 int hcubature_v(unsigned fdim, integrand_v f, void *fdata,
-		unsigned dim, const double *xmin, const double *xmax, 
-		size_t maxEval, double reqAbsError, double reqRelError, 
+		unsigned dim, const double *xmin, const double *xmax,
+		size_t maxEval, double reqAbsError, double reqRelError,
 		error_norm norm,
 		double *val, double *err);
 
@@ -101,36 +101,36 @@ int hcubature_v(unsigned fdim, integrand_v f, void *fdata,
    smooth integrands in low dimensions. */
 int pcubature_v_buf(unsigned fdim, integrand_v f, void *fdata,
                     unsigned dim, const double *xmin, const double *xmax,
-                    size_t maxEval, 
+                    size_t maxEval,
                     double reqAbsError, double reqRelError,
                     error_norm norm,
                     unsigned *m,
                     double **buf, size_t *nbuf, size_t max_nbuf,
-                    double *val, double *err, char *LogFileName);
+                    double *val, double *err, const char *LogFileName);
 
 int pcubature_v(unsigned fdim, integrand_v f, void *fdata,
-                unsigned dim, const double *xmin, const double *xmax, 
-                size_t maxEval, double reqAbsError, double reqRelError, 
+                unsigned dim, const double *xmin, const double *xmax,
+                size_t maxEval, double reqAbsError, double reqRelError,
                 error_norm norm, double *val, double *err);
 
 int pcubature(unsigned fdim, integrand f, void *fdata,
-	      unsigned dim, const double *xmin, const double *xmax, 
-	      size_t maxEval, double reqAbsError, double reqRelError, 
+	      unsigned dim, const double *xmin, const double *xmax,
+	      size_t maxEval, double reqAbsError, double reqRelError,
 	      error_norm norm, double *val, double *err);
 
 /* HR 201308 _log versions allow status logging to user-specified filename */
 int pcubature_v_log(unsigned fdim, integrand_v f, void *fdata,
-                    unsigned dim, const double *xmin, const double *xmax, 
-                    size_t maxEval, double reqAbsError, double reqRelError, 
+                    unsigned dim, const double *xmin, const double *xmax,
+                    size_t maxEval, double reqAbsError, double reqRelError,
                     error_norm norm,
-                    double *val, double *err, 
+                    double *val, double *err,
                     const char *LogFileName);
 
 int pcubature_log(unsigned fdim, integrand f, void *fdata,
-	          unsigned dim, const double *xmin, const double *xmax, 
-	          size_t maxEval, double reqAbsError, double reqRelError, 
+	          unsigned dim, const double *xmin, const double *xmax,
+	          size_t maxEval, double reqAbsError, double reqRelError,
 	          error_norm norm,
-	          double *val, double *err, 
+	          double *val, double *err,
                   const char *LogFileName);
 
 /***************************************************************/
@@ -141,15 +141,15 @@ typedef void (*oldintegrand) (unsigned ndim, const double *x, void *,
                               unsigned fdim, double *fval);
 
 int adapt_integrate(unsigned fdim, oldintegrand f, void *fdata,
-		    unsigned dim, const double *xmin, const double *xmax, 
-		    unsigned maxEval, double reqAbsError, double reqRelError, 
+		    unsigned dim, const double *xmin, const double *xmax,
+		    unsigned maxEval, double reqAbsError, double reqRelError,
 		    double *val, double *err);
 
 int adapt_integrate_log(unsigned fdim, oldintegrand f,
                         void *fdata, unsigned dim,
-                        const double *xmin, const double *xmax, 
-                        unsigned maxEval, double reqAbsError, 
-                        double reqRelError, double *val, double *err, 
+                        const double *xmin, const double *xmax,
+                        unsigned maxEval, double reqAbsError,
+                        double reqRelError, double *val, double *err,
                         const char *LogFileName, int LogInterval);
 
 #ifdef __cplusplus

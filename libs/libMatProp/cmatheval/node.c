@@ -1,19 +1,19 @@
-/* 
+/*
  * Copyright (C) 1999, 2002, 2003, 2004, 2005, 2006, 2007 Free Software
  * Foundation, Inc.
- * 
+ *
  * This file is part of GNU libmatheval
- * 
+ *
  * GNU libmatheval is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
  * Software Foundation; either version 2, or (at your option) any later
  * version.
- * 
+ *
  * GNU libmatheval is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * program; see the file COPYING. If not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
@@ -38,7 +38,7 @@ Node *node_create_number(cmplx val) {
 }
 
 Node           *
-node_create(char type, ...)
+node_create(int type, ...)
 {
 	Node           *node;	/* New node.  */
 	va_list         ap;	/* Variable argument list.  */
@@ -134,7 +134,7 @@ node_destroy(Node * node)
 Node           *
 node_copy(Node * node)
 {
-	/* According to node type, create (deep) copy of subtree rooted at 
+	/* According to node type, create (deep) copy of subtree rooted at
 	 * node. */
 	switch (node->type) {
 	case 'n':
@@ -290,7 +290,7 @@ node_simplify(Node * node, int sc /* simplify constants? */)
 				return left;
 			} else
 				return node;
-		/* Eliminate 0 and 1 as both left and right exponentiation 
+		/* Eliminate 0 and 1 as both left and right exponentiation
 		 * operands. */
 		else if (node->data.bin_op.operation == '^')
 			if (node->data.bin_op.left->type == 'n'
@@ -401,7 +401,7 @@ node_is_real(Node * node, const cmplx *Vals)
 	case 'c':
 	     /* Constant values are used from symbol table. */
 	     return cimag(node->data.constant->data.value) == 0.0;
-	     
+
 	case 'v':
 	     /* Variable values are used from symbol table. */
 	     if (node->data.variable->type == 'V') /* threadsafe from Vals */
@@ -455,7 +455,7 @@ node_is_real(Node * node, const cmplx *Vals)
 }
 
 Node           *
-node_derivative(Node * node, char *name, SymbolTable * symbol_table)
+node_derivative(Node * node, const char *name, SymbolTable * symbol_table)
 {
 	/* According to node type, derivative tree for subtree rooted at
 	 * node is created. */
@@ -878,7 +878,7 @@ node_derivative(Node * node, char *name, SymbolTable * symbol_table)
 								    function.
 								    child)),
 						       node_create_number(2.0)));
-		/* Apply rule of hyperbolic cotangent function derivative. 
+		/* Apply rule of hyperbolic cotangent function derivative.
 		 */
 		else if (!strcmp(node->data.function.record->name, "coth"))
 			return node_create('u', '-',
@@ -1294,7 +1294,7 @@ node_derivative(Node * node, char *name, SymbolTable * symbol_table)
 								   2.0)));
 
 		case '^':
-			/* If right operand of exponentiation number apply 
+			/* If right operand of exponentiation number apply
 			 * (f^n)'=n*f^(n-1)*f' derivative rule. */
 			if (node->data.bin_op.right->type == 'n')
 				return node_create('b', '*',
@@ -1383,7 +1383,7 @@ node_get_length(Node * node)
 	int             count;	/* Count of bytes written to above string. */
 	int             length;	/* Length of above string. */
 
-	/* According to node type, calculate length of string representing 
+	/* According to node type, calculate length of string representing
 	 * subtree rooted at node. */
 	switch (node->type) {
 	case 'n':

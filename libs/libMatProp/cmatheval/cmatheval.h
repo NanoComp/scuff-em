@@ -1,19 +1,19 @@
-/* 
+/*
  * Copyright (C) 1999, 2002, 2003, 2004, 2005, 2006, 2007 Free Software
  * Foundation, Inc.
- * 
+ *
  * This file is part of GNU libmatheval
- * 
+ *
  * GNU libmatheval is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
  * Software Foundation; either version 2, or (at your option) any later
  * version.
- * 
+ *
  * GNU libmatheval is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * program; see the file COPYING. If not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
@@ -50,7 +50,7 @@ extern          "C" {
 	 * and fourth argument. Number of variables i.e. length of these
 	 * two arrays is given by second argument.  Function returns
 	 * evaluated function value.  In case that function contains
-	 * variables with names not given through third function argument, 
+	 * variables with names not given through third function argument,
 	 * value of this variable is undeterminated. */
 	extern cevaluator_complex   cevaluator_evaluate(void *cevaluator, int count,
 					   char **names, cevaluator_complex *values);
@@ -72,10 +72,10 @@ extern          "C" {
         extern int cevaluator_set_var_index(void *cevaluator, const char *name, ptrdiff_t idx);
 
 	/* Return textual representation of function given by cevaluator.
-	 * Textual representation is built after cevaluator simplification, 
+	 * Textual representation is built after cevaluator simplification,
 	 * so it may differ from original string supplied when creating
 	 * cevaluator.  String representing function is allocated,
-	 * remembered and later destroyed by cevaluator object, thus caller 
+	 * remembered and later destroyed by cevaluator object, thus caller
 	 * must not free returned pointer.  Returned information is valid
 	 * until cevaluator object destroyed. */
 	extern char    *cevaluator_get_string(void *cevaluator);
@@ -88,7 +88,7 @@ extern          "C" {
 	 * is stored into location pointed by third argument.  Array is
 	 * allocated, remembered and later destroyed by cevaluator object,
 	 * thus caller must not free any of string nor array itself.
-	 * Returned information is valid until cevaluator object destroyed. 
+	 * Returned information is valid until cevaluator object destroyed.
 	 */
 	extern void     cevaluator_get_variables(void *cevaluator,
 						char ***names, int *count);
@@ -96,9 +96,9 @@ extern          "C" {
 	/* Create cevaluator for first derivative of function represented
 	 * by cevaluator given as first argument using derivative variable
 	 * given as second argument. */
-	extern void    *cevaluator_derivative(void *cevaluator, char *name);
+	extern void    *cevaluator_derivative(void *cevaluator, const char *name);
 
-	/* Helper functions to simplify evaluation when variable names are 
+	/* Helper functions to simplify evaluation when variable names are
 	 * "x", "x" and "y" or "x" and "y" and "z" respectively. */
 	extern cevaluator_complex   cevaluator_evaluate_x(void *cevaluator, cevaluator_complex x);
 	extern cevaluator_complex   cevaluator_evaluate_x_y(void *cevaluator, cevaluator_complex x,
@@ -120,7 +120,7 @@ extern          "C" {
 	   should be set to have a nonzero imaginary part here.   This
 	   routine may give false negatives, but should not give false
 	   positives. */
-        extern int cevaluator_is_real(void *cevaluator, 
+        extern int cevaluator_is_real(void *cevaluator,
 				      int count, char **names,
 				      cevaluator_complex *values);
 
